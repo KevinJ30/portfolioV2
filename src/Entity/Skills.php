@@ -32,6 +32,10 @@ class Skills
      */
     private $level;
 
+    public function __construct() {
+        $this->setLevel(0);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,7 +72,15 @@ class Skills
 
     public function setLevel(int $level): self
     {
-        $this->level = $level;
+        if($level > 5) {
+            $this->level = 5;
+        }
+        else if($level < 0) {
+            $this->level = 0;
+        }
+        else {
+            $this->level = $level;
+        }
 
         return $this;
     }

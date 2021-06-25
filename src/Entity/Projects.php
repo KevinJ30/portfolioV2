@@ -42,6 +42,10 @@ class Projects
      */
     private $created;
 
+    public function __construct() {
+        $this->setCreated(new \DateTimeImmutable());
+    }
+
     public function getId(): ?int
     {
         return $this->id;
