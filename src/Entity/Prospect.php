@@ -42,6 +42,10 @@ class Prospect
      */
     private $content;
 
+    public function __construct() {
+        $this->setCreated(new \DateTimeImmutable());
+    }
+
     public function getId(): ?int
     {
         return $this->id;
