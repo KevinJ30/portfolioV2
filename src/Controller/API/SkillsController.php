@@ -2,6 +2,7 @@
 
 namespace App\Controller\API;
 
+use App\Auth\APIAuthorizationInterface;
 use App\Repository\SkillsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @route("/API", name="API_")
  **/
-class SkillsController extends AbstractController
+class SkillsController extends AbstractController implements APIAuthorizationInterface
 {
     /**
      * Retourne la liste des compétences
