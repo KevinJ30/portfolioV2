@@ -32,6 +32,11 @@ class Skills
      */
     private $level;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     **/
+    private $type;
+
     public function __construct() {
         $this->setLevel(0);
     }
@@ -82,6 +87,16 @@ class Skills
             $this->level = $level;
         }
 
+        return $this;
+    }
+
+    public function getType(): ?string {
+        return $this->type;
+    }
+
+    public function setType(string $type): self {
+        $this->type = $type;
+        
         return $this;
     }
 }
