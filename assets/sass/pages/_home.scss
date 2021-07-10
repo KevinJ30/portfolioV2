@@ -1,6 +1,5 @@
-.section_home {
-  @include section();
-}
+.section_home { @include section(); }
+.section_skills { @include section($secondary-color); color:$primary-color; }
 
 .introduction__callActions {
     display:inline-flex;
@@ -15,6 +14,19 @@
 .introduction__callActions > .btn:last-child {
     margin-right:0;
 }
+
+.skill {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.skill > div {
+    margin-bottom: space(2, 8);
+    font-weight: 400;
+    text-transform: uppercase;
+}
+.skill > div:last-child { margin-bottom: 0; }
 
 @include down(1080) {
     .section_home .grid-2 {
