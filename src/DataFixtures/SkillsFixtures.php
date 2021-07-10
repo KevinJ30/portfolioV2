@@ -20,7 +20,8 @@ class SkillsFixtures extends Fixture
                                 <path d="M52.9642 40.221V49.494H65.3382L64.1743 61.521L52.9642 64.311V73.959L73.5669 68.688L73.7165 67.122L76.0768 42.711L76.3239 40.221H52.9642Z" fill="white"/>
                                 <path d="M52.9642 21.453V30.726H77.2375L77.4391 28.644L77.8975 23.943L78.1381 21.453H52.9642Z" fill="white"/>
                                 </svg>');
-        $skill1->setLevel(4);
+        $skill1->setLevel(5);
+        $skill1->setType('front');
 
         $manager->persist($skill1);
 
@@ -36,6 +37,7 @@ class SkillsFixtures extends Fixture
                                 <path d="M53.0001 39.573V48.846H41.9493L41.7478 46.761L41.2926 42.06L41.052 39.573H53.0001Z" fill="#EBEBEB"/>
                                 </svg>');
         $skill->setLevel(4);
+        $skill->setType('front');
         $manager->persist($skill);
         $manager->flush();
     }
