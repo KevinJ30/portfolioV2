@@ -22,6 +22,7 @@ class ConfigurationRepository extends ServiceEntityRepository
     public function getConfigurationHome() {
         return $this->createQueryBuilder('c')
                     ->orWhere('c.name = \'site_title\'')
+                    ->orWhere('c.name = \'svg_introduction\'')
                     ->orWhere('c.name = \'introduction\'')
                     ->orderBy('c.name', 'desc')
                     ->getQuery()

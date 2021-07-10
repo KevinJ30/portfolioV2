@@ -1,0 +1,9 @@
+@mixin section($color:inherit) {
+    padding:space(8, 8);
+    background:$color;
+}
+
+.section__title {
+  margin-bottom:space(5, 8);
+  font-size: 2.8em;
+}

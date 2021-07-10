@@ -22,8 +22,9 @@ class HomeController extends AbstractController
         // Get Introduction & get site_title
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'site_title' => $configuration[0]->getContent(),
-            'introduction' => $configuration[1]->getContent()
+            'site_title' => $configuration[1]->getContent(),
+            'svg_introduction' => $configuration[0]->getContent(),
+            'introduction' => $configuration[2]->getContent()
         ]);
     }
 }
