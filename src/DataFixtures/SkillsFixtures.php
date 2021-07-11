@@ -12,7 +12,7 @@ class SkillsFixtures extends Fixture
     {
         $skill1 = new Skills();
         $skill1->setName('html');
-        $skill1->setIcons('<svg width="106" height="96" viewBox="0 0 106 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        $skill1->setIcons('<svg viewBox="0 0 106 96" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20.1696 81.603L12.8643 6H93.1358L85.8206 81.591L52.9513 90L20.1696 81.603Z" fill="#E44F26"/>
                                 <path d="M53 83.574L79.5621 76.779L85.8109 12.183H53V83.574Z" fill="#F1662A"/>
                                 <path d="M53 40.221H39.7027L38.7859 30.726H53V21.453H27.8034L28.044 23.943L30.5116 49.494H53V40.221Z" fill="#EBEBEB"/>
@@ -27,7 +27,7 @@ class SkillsFixtures extends Fixture
 
         $skill = new Skills();
         $skill->setName('css');
-        $skill->setIcons('<svg width="106" height="96" viewBox="0 0 106 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        $skill->setIcons('<svg viewBox="0 0 106 96" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20.1697 81.603L12.8676 6H93.1326L85.8207 81.591L52.9513 90L20.1697 81.603Z" fill="#1572B6"/>
                                 <path d="M53 83.574L79.5621 76.779L85.8109 12.183H53V83.574Z" fill="#33A9DC"/>
                                 <path d="M53 39.573H66.2973L67.2141 30.078H53V20.805H78.1966L77.956 23.292L75.4884 48.846H53V39.573Z" fill="white"/>
@@ -42,7 +42,7 @@ class SkillsFixtures extends Fixture
 
         $skill = new Skills();
         $skill->setName('PHP');
-        $skill->setIcons('<svg width="180" height="80" viewBox="0 0 180 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        $skill->setIcons('<svg viewBox="0 0 180 80" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0)">
 <path d="M89.9766 79.763C139.668 79.763 179.95 61.9074 179.95 39.8815C179.95 17.8556 139.668 0 89.9766 0C40.2856 0 0.00305176 17.8556 0.00305176 39.8815C0.00305176 61.9074 40.2856 79.763 89.9766 79.763Z" fill="url(#paint0_radial)"/>
 <path d="M89.9765 76.8C137.727 76.8 176.435 60.271 176.435 39.8815C176.435 19.4919 137.727 2.96295 89.9765 2.96295C42.2266 2.96295 3.51758 19.4919 3.51758 39.8815C3.51758 60.271 42.2266 76.8 89.9765 76.8Z" fill="#6181B6"/>
