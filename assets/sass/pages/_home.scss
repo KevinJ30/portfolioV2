@@ -1,5 +1,11 @@
 .section_home { @include section(); }
 .section_skills { @include section($secondary-color); color:$primary-color; }
+.section_projects { @include section(); }
+
+.introduction__title {
+    border:none;
+    line-height: 1em;
+}
 
 .introduction__callActions {
     display:inline-flex;
@@ -19,10 +25,6 @@
     border-bottom:1px solid $primary-color;
     margin-bottom: space(2, 8);
     line-height:1.5em;
-}
-
-.section_skills .section__details {
-    text-align:center;
 }
 
 .skills__container {
@@ -63,6 +65,13 @@
 .skill__svg svg {
     width: 80px;
     height: 80px;
+}
+
+.projects__container {
+    display: grid;
+    margin-top:space(6, 8);
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap:space(6, 8);
 }
 
 @include down(1080) {

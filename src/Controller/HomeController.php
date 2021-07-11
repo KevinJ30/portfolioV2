@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ConfigurationRepository;
+use App\Repository\ProjectsRepository;
 use App\Repository\SkillsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,10 +14,11 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(ConfigurationRepository $configurationRepository, SkillsRepository $skillsRepository): Response
+    public function index(ConfigurationRepository $configurationRepository, SkillsRepository $skillsRepository, ProjectsRepository $projectsRepository): Response
     {
         $configuration = $configurationRepository->getConfigurationHome();
         $skills = $skillsRepository->getSkillsGroupedType();
+        $projects = $projectsRepository->getLastProjects(4);
 
         /**
          * Récuperer les informations de la home page dans la table configuration
@@ -27,7 +29,8 @@ class HomeController extends AbstractController
             'site_title' => $configuration[1]->getContent(),
             'svg_introduction' => $configuration[0]->getContent(),
             'introduction' => $configuration[2]->getContent(),
-            'skills' => $skills
+            'skills' => $skills,
+            'projects' => $projects
         ]);
     }
 }
