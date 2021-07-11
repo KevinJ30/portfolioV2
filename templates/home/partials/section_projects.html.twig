@@ -14,8 +14,8 @@
                     </div>
                     <div class="card__content">
                         <p class="card__details">{{ project.details }}</p>
-                        <p class="mb-5">{{ project.description }}</p>
-                        <a class="btn btn-primary btn-outline" href="#">En savoir plus...</a>
+                        {{ project.description|markdown}}
+                        <a class="btn btn-primary btn-outline mt-4" href="#">En savoir plus...</a>
                     </div>
                 </div>
             {% endfor %}

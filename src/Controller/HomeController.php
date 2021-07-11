@@ -19,7 +19,7 @@ class HomeController extends AbstractController
         $configuration = $configurationRepository->getConfigurationHome();
         $skills = $skillsRepository->getSkillsGroupedType();
         $projects = $projectsRepository->getLastProjects(4);
-
+        //dd($projects);
         /**
          * Récuperer les informations de la home page dans la table configuration
          **/
