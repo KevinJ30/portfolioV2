@@ -70,8 +70,9 @@
 .projects__container {
     display: grid;
     margin-top:space(6, 8);
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill,minmax(250px, 411px));
     grid-gap:space(6, 8);
+    justify-content: center;
 }
 
 @include down(1080) {
@@ -85,6 +86,16 @@
 
     .section_home .introduction_image {
         order:-1;
+    }
+
+    .projects__container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@include down(800) {
+    .projects__container {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 
