@@ -19,6 +19,20 @@ class SkillsRepository extends ServiceEntityRepository
         parent::__construct($registry, Skills::class);
     }
 
+    public function getSkillsGroupedType() : array  {
+        $skills = [];
+
+        $req_skills = $this->createQueryBuilder('s')
+            ->getQuery()
+            ->execute();
+
+        foreach($req_skills as $skill) {
+            $skills[$skill->getType()][] = $skill;
+        }
+
+        return $skills;
+    }
+
     // /**
     //  * @return Skills[] Returns an array of Skills objects
     //  */

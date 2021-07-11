@@ -1,0 +1,29 @@
+{% block section_skills %}
+    <div class="skills">
+        <h1 class="section__title">Compétences</h1>
+        <p class="section__details">Présentation de mes compétences</p>
+
+
+        {% for type, data in skills %}
+            <h3>{{ type }}</h3>
+            <div class="skills__container">
+
+                {% for skill in data %}
+                    <div class="skill">
+                        <div class="skill__notes">
+                            {{ notes(skill.level) }}
+                        </div>
+
+                        <div class="skill__svg">
+                            {{ skill.icons | raw }}
+                        </div>
+
+                        <div class="skill__name">
+                            {{ skill.name }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

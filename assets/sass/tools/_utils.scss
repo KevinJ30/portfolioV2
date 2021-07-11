@@ -1,0 +1,32 @@
+@mixin container() {
+  margin:auto;
+  max-width:$container-size;
+}
+
+@mixin headers($minSize, $scale, $maxHeaders: 6) {
+  @for $i from 1 through $maxHeaders {
+    h#{$i} {
+      margin-bottom: space(2, 8);
+      font-size: $minSize + $scale * ($maxHeaders - $i) + em;
+    }
+  }
+}
+
+@function space($number_space, $size_space) {
+  @return $size_space * $number_space + px;
+}
+
+
+@function pow($base, $exponent) {
+  $result: 1;
+  @for $_ from 1 through $exponent {
+    $result: $result * $base;
+  }
+  @return $result;
+}
+
+@mixin down($size) {
+  @media (max-width: $size + 'px') {
+    @content;
+  }
+}

@@ -1,0 +1,114 @@
+.section_home { @include section(); }
+.section_skills { @include section($secondary-color); color:$primary-color; }
+.section_projects { @include section(); }
+
+.introduction__title {
+    border:none;
+    line-height: 1em;
+}
+
+.introduction__callActions {
+    display:inline-flex;
+    flex-direction:row;
+    margin-top: space(5, 8);
+}
+
+.introduction__callActions > .btn {
+    margin-right:space(2, 8);
+}
+
+.introduction__callActions > .btn:last-child {
+    margin-right:0;
+}
+
+.section_skills .section__title {
+    border-bottom:1px solid $primary-color;
+    margin-bottom: space(2, 8);
+    line-height:1.5em;
+}
+
+.skills__container {
+    display:flex;
+    flex-direction:row;
+    margin-bottom: space(4, 8);
+}
+
+.skills__container > .skill { margin-right: space(4, 8); }
+.skills__container > .skill:last-child { margin-right: 0; }
+
+.section_skills h3 {
+    font-size:1.8em;
+    margin-bottom:space(4, 8);
+}
+
+.skill {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.skill > div {
+    margin-bottom: space(2, 8);
+    font-weight: 400;
+    text-transform: uppercase;
+}
+.skill > div:last-child { margin-bottom: 0; }
+
+.skill__notes {
+    display:flex;
+    flex-direction: row;
+}
+
+.skill__notes > span { margin-right: space(1, 8); }
+.skill_notes > span:last-child { margin-right:0; }
+
+.skill__svg svg {
+    width: 80px;
+    height: 80px;
+}
+
+.projects__container {
+    display: grid;
+    margin-top:space(6, 8);
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap:space(6, 8);
+}
+
+@include down(1080) {
+    .section_home .grid-2 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .section_home {
+        text-align: center;
+    }
+
+    .section_home .introduction_image {
+        order:-1;
+    }
+}
+
+@include down(600) {
+    .section__title {
+        font-size:2.2em;
+    }
+
+    .section_home .introduction__callActions {
+        flex-direction: column;
+    }
+
+    .section_home .introduction__callActions > .btn {
+        margin: 0 0 space(2, 8);
+    }
+
+    .section_skills h3 {
+        text-align: center;
+    }
+
+    .skills__container {
+        flex-direction: column;
+    }
+
+    .skills__container > .skill { margin-right: 0; margin-bottom: space(4, 8); }
+    .skills__container > .skill:last-child { margin-right: 0; margin-bottom: 0; }
+}

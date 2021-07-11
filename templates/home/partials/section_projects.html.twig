@@ -1,0 +1,25 @@
+{% block section_projects %}
+    <h2 class="section__title">Mes dernières réalisation</h2>
+    <p class="section__details">Parcourez une petite partie de mes réalisations</p>
+    {% if projects %}
+
+        <div class="projects__container">
+            {% for project in projects %}
+                <div class="card">
+                    <div class="card__header">
+                        <h3 class="card__title">{{ project.title }}</h3>
+                    </div>
+                    <div class="card__image">
+                        <img src="{{ project.thumb_url }}" alt="card image">
+                    </div>
+                    <div class="card__content">
+                        <p class="card__details">{{ project.details }}</p>
+                        {{ project.description|markdown}}
+                        <a class="btn btn-primary btn-outline mt-4" href="#">En savoir plus...</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+{% endblock %}
