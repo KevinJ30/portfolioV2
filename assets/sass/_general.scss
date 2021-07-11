@@ -13,3 +13,36 @@ body {
    background: $primary-color;
    color: $light-color;
 }
+
+table {
+   width: 100%;
+   text-align:left;
+   font-weight:400;
+}
+
+table thead {
+   font-weight:600;
+   background: $dark-secondary-color;
+   border:1px solid #000;
+}
+
+table thead th {
+   padding:16px;
+}
+
+table tbody {
+   border:1px solid #000;
+}
+
+table tbody td {
+   padding:16px;
+   vertical-align: middle;
+}
+
+table tbody tr {
+   background:#1D1F20;
+}
+
+table tbody tr:nth-child(even) {
+   background:$dark-secondary-color;
+}

@@ -1,0 +1,35 @@
+{% extends 'admin.html.twig' %}
+{% block body %}
+    <main class="page page-admin_skills">
+
+        <div class="section">
+            <div class="container">
+                <h1>Administrer les compétences</h1>
+                <a href="#" class="btn btn-primary mb-2">Ajouter une compétences</a>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Level</th>
+                            <th>Type</th>
+                            <th>Icons</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {%  for skill in skills %}
+                            <tr>
+                                <td>{{ skill.name }}</td>
+                                <td>{{ notes(skill.level) }}</td>
+                                <td>{{ skill.type }}</td>
+                                <td>{{ skill.icons|raw }}</td>
+                                <td>Modifier - Supprimer</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock %}
