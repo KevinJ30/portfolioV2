@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import APIFetch from "../../utils/API";
 
 export function EditableInput(props) {
     const [value, setValue] = useState('');
@@ -8,20 +9,11 @@ export function EditableInput(props) {
     }
 
     const save = () => {
-        let data = {
-            key: 'name',
+        APIFetch(props.url_action, 'PUT', {
+            key: props.field,
             value: value
-        }
+        });
 
-        // Sauvegarde dans la base de données requête  HTTP
-        fetch(props.url_action, {
-            headers: new Headers({
-               'Content-Type': 'application/json'
-            }),
-            method:'PUT',
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
         props.setContent(value)
         close();
     }

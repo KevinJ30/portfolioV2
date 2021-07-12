@@ -17,7 +17,7 @@ export function EditableItem(props) {
     }
     else {
         return <div className={"js-editable"}>
-            <EditableInput placeholder={props.input_placeholder} setEditable={setEditable} url_action={props.url_action} setContent={setContent} />
+            <EditableInput placeholder={props.input_placeholder} setEditable={setEditable} url_action={props.url_action} setContent={setContent} field={props.field} />
         </div>;
     }
 }

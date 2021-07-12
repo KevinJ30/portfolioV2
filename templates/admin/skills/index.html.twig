@@ -19,9 +19,9 @@
                     <tbody>
                     {%  for skill in skills %}
                         <tr>
-                            <td><editable-item content="{{ skill.name }}" url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}" input_placeholder="Entrée le nom de la compétence"></editable-item></td>
+                            <td><editable-item content="{{ skill.name }}" url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}" input_placeholder="Entrée le nom de la compétence" field="name"></editable-item></td>
                             <td>{{ notes(skill.level) }}</td>
-                            <td>{{ skill.type }}</td>
+                            <td><editable-item content="{{ skill.type }}" url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}" input_placeholder="Type de compétence" field="type"></editable-item></td>
                             <td>{{ skill.icons|raw }}</td>
                             <td>Modifier - Supprimer</td>
                         </tr>
