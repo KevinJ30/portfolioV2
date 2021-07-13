@@ -23,6 +23,11 @@
 @import 'general';
 
 /**
+ * Modules
+ **/
+@import 'modules/navigation';
+
+/**
  * Partials
  **/
 @import 'partials/section';
@@ -31,3 +36,8 @@
  * Pages
  **/
 @import 'pages/home';
+
+/**
+ * Pages Administration
+ **/
+@import 'pages/admin/skills/home';

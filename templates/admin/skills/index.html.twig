@@ -1,0 +1,34 @@
+{% extends 'admin.html.twig' %}
+{% block body %}
+    <main class="page page-admin_skills" xmlns="http://www.w3.org/1999/html">
+        <div class="section">
+            <div class="container">
+                <h1>Administrer les compétences</h1>
+                <a href="#" class="btn btn-primary mb-2">Ajouter une compétences</a>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Level</th>
+                            <th>Type</th>
+                            <th>Icons</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    {%  for skill in skills %}
+                        <tr>
+                            <td><editable-item content="{{ skill.name }}" url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}" input_placeholder="Entrée le nom de la compétence" field="name"></editable-item></td>
+                            <td>{{ notes(skill.level) }}</td>
+                            <td><editable-item content="{{ skill.type }}" url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}" input_placeholder="Type de compétence" field="type"></editable-item></td>
+                            <td>{{ skill.icons|raw }}</td>
+                            <td>Modifier - Supprimer</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock %}

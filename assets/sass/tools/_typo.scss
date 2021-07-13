@@ -19,3 +19,9 @@ ul {
 ul li {
   padding:8px 0;
 }
+
+a {
+  border-bottom: 1px solid $light-color;
+  text-decoration: none;
+  color: $light-color;
+}
