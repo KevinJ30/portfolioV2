@@ -11,13 +11,22 @@ export function EditableItem(props) {
     }
 
     if(!editable) {
-        return <div onDoubleClick={onDbCLick}>
-            { content }
-        </div>;
+        return <div onDoubleClick={onDbCLick} dangerouslySetInnerHTML={{ __html: content}} />;
     }
     else {
         return <div className={"js-editable"}>
-            <EditableInput placeholder={props.input_placeholder} setEditable={setEditable} url_action={props.url_action} setContent={setContent} field={props.field} />
+            <EditableInput
+                label_id={props.label_id}
+                label={props.label}
+                value={content}
+                type={props.type}
+                value_type={props.value_type}
+                placeholder={props.input_placeholder}
+                classname={props.classname}
+                setEditable={setEditable}
+                url_action={props.url_action}
+                setContent={setContent}
+                field={props.field} />
         </div>;
     }
 }
