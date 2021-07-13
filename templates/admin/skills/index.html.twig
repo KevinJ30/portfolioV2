@@ -12,18 +12,55 @@
                             <th>Level</th>
                             <th>Type</th>
                             <th>Icons</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
 
                     <tbody>
                     {%  for skill in skills %}
                         <tr>
-                            <td><editable-item content="{{ skill.name }}" url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}" input_placeholder="Entrée le nom de la compétence" field="name"></editable-item></td>
-                            <td>{{ notes(skill.level) }}</td>
-                            <td><editable-item content="{{ skill.type }}" url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}" input_placeholder="Type de compétence" field="type"></editable-item></td>
-                            <td>{{ skill.icons|raw }}</td>
-                            <td>Modifier - Supprimer</td>
+                            <td>
+                                <editable-item
+                                        label_id="name"
+                                        label="Modifier le nom"
+                                        type="type"
+                                        value_type="text"
+                                        content="{{ skill.name }}"
+                                        url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}"
+                                        input_placeholder="Entrée le nom de la compétence" field="name"
+                                        classname="form-control"></editable-item>
+                            </td>
+                            <td>
+                                <editable-item
+                                        label_id="level"
+                                        label="Modifier le niveau de votre compétence"
+                                        content="{{ skill.level }}"
+                                        url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}"
+                                        input_placeholder="Saisissez le niveau de compétence"
+                                        field="level"
+                                        classname="form-control"></editable-item>
+                            </td>
+                            <td>
+                                <editable-item
+                                        label_id="type"
+                                        label="Modifier le type de votre compétences"
+                                        content="{{ skill.type }}"
+                                        url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}"
+                                        input_placeholder="Type de compétence"
+                                        field="type"
+                                        classname="form-control"></editable-item>
+                            </td>
+                            <td>
+                                <editable-item
+                                        label_id="icons"
+                                        label="Modifier l'icon de votre compétence"
+                                        type="textarea"
+                                        content="{{ skill.icons }}"
+                                        url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}"
+                                        input_placeholder="Modifier l'icon"
+                                        field="icons"
+                                        classname="form-control">
+                                </editable-item>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

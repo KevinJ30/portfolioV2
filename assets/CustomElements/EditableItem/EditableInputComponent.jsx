@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import APIFetch from "../../utils/API";
 
 export function EditableInput(props) {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState(props.value);
 
     const close = () => {
         props.setEditable(false);
@@ -37,7 +37,33 @@ export function EditableInput(props) {
         }
     }
 
-    return <React.Fragment>
-        <input type={"text"} placeholder={props.placeholder} onChange={handleValueChange} value={value} onKeyUp={handleAction} autoFocus={true}/>
-    </React.Fragment>;
+    const display_input = () => {
+        switch(props.type) {
+            case 'textarea':
+                return <div className="form-group">
+                            <label htmlFor={props.label_id}>{props.label}</label>
+                            <textarea
+                                id={props.label_id}
+                                placeholder={props.placeholder}
+                                className={props.classname}
+                                onChange={handleValueChange}
+                                onKeyUp={handleAction}
+                                autoFocus={true}>
+                                {value}
+                            </textarea>
+                        </div>;
+            default:
+                return <input
+                    id={props.label_id}
+                    type={props.value_type}
+                    placeholder={props.placeholder}
+                    onChange={handleValueChange}
+                    value={value}
+                    onKeyUp={handleAction}
+                    autoFocus={true}
+                    className={props.classname} />
+        }
+    }
+
+    return <React.Fragment>{ display_input() }</React.Fragment>;
 }
