@@ -3,7 +3,7 @@ import React from 'react';
 export function FormAddSkill() {
     return <form id="js-form-add-skill" action="#">
         <div className="form-group">
-            <label htmlFor="name">Nom du skill</label>
+            <label htmlFor="name">Nom de la compétence</label>
             <input id="level" className="form-control" type="text" placeholder="Nom de la compétence"/>
         </div>
 

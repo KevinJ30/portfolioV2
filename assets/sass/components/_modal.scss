@@ -30,7 +30,26 @@
   cursor:pointer;
 }
 
+.modal_button_close svg{
+  color:adjust-color($primary-color, $alpha: -0.5);
+  transition: color .3s ease, transform .3s ease;
+}
+
+.modal_button_close:hover svg{
+  color:adjust-color($primary-color, $alpha: 1);
+  transform: translateY(-1px) scale(1.03);
+}
+
+.modal__header {
+  font-size:1.4em;
+}
+
+.modal__wrapper label {
+  font-weight:400;
+}
+
 .modal__wrapper input {
   border-color:$primary-color;
+  color:$primary-color;
 }
 
