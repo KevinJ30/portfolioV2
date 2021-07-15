@@ -14,7 +14,6 @@ export default class ModalCustomElement extends HTMLElement {
         const props = Object.values(this.attributes).map(attribute => [attribute.name, attribute.value]);
         const content = ['content', this.innerHTML]
         props.push(content);
-        console.log(props)
         this.component = <Modal {...Object.fromEntries(props)} />
 
         render(this.component, this);

@@ -11,7 +11,7 @@
   overflow:hidden;
 }
 
-.modal__wrapper {
+.modal--wrapper {
   position: relative;
   padding:16px;
   width: 80%;
@@ -20,9 +20,9 @@
   box-shadow: 10px 10px 40px #0F1315;
 }
 
-.modal__wrapper > * { color:#000; }
+.modal--wrapper > * { color:#000; }
 
-.modal_button_close {
+.modal-button-close {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -30,7 +30,7 @@
   cursor:pointer;
 }
 
-.modal_button_close svg{
+.modal-button-close svg{
   color:adjust-color($primary-color, $alpha: -0.5);
   transition: color .3s ease, transform .3s ease;
 }
@@ -40,15 +40,15 @@
   transform: translateY(-1px) scale(1.03);
 }
 
-.modal__header {
+.modal-header {
   font-size:1.4em;
 }
 
-.modal__wrapper label {
+.modal--wrapper label {
   font-weight:400;
 }
 
-.modal__wrapper input {
+.modal--wrapper input {
   border-color:$primary-color;
   color:$primary-color;
 }
