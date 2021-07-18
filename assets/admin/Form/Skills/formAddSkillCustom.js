@@ -8,7 +8,7 @@ export default class FormAddSkillCustom extends HTMLElement {
      **/
     connectedCallback() {
         const props = Object.values(this.attributes).map(attribute => [attribute.name, attribute.value])
-        this.component = <FormAddSkill />;
+        this.component = <FormAddSkill {...Object.fromEntries(props)} />;
         render(this.component , this);
     }
 

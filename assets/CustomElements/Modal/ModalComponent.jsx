@@ -35,7 +35,7 @@ function isDeadZone(ref, clientX, clientY) {
  * @returns {React.ReactPortal}
  * @constructor
  **/
-function ModalDialog({content, closeModal, modal_title}) {
+function ModalDialog({children, closeModal, modal_title}) {
     const [load, setLoad] = useState(false);
     const ref = useRef(null);
     let handlerDead = null;
@@ -108,7 +108,7 @@ function ModalDialog({content, closeModal, modal_title}) {
                     <h4>{modal_title}</h4>
                 </div>
                 <div className="modal-content">
-                    <div dangerouslySetInnerHTML={{__html: content}} />
+                    {children}
                 </div>
             </div>
         </div>, document.body);
@@ -123,7 +123,7 @@ function ModalDialog({content, closeModal, modal_title}) {
  * @returns {JSX.Element}
  * @constructor
  **/
-export function Modal({content, button_text, modal_title}) {
+export function Modal({button_text, modal_title, children}) {
     const [visibility, setVisibility] = useState(false)
 
     /**
@@ -148,7 +148,7 @@ export function Modal({content, button_text, modal_title}) {
      * @returns {boolean|JSX.Element}
      */
     const displayModal = () => {
-        return visibility && <ModalDialog content={content} visibility={visibility} closeModal={close} modal_title={modal_title} />;
+        return visibility && <ModalDialog visibility={visibility} closeModal={close} modal_title={modal_title}>{children}</ModalDialog>;
     }
 
     return <React.Fragment>

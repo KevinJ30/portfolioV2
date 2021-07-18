@@ -18,6 +18,9 @@
   background:$light-color;
   border-radius:5px;
   box-shadow: 10px 10px 40px #0F1315;
+  animation: slideInTop 1s;
+  transition:transform .5s, opacity .5s;
+  transition-timing-function: ease-in-out;
 }
 
 .modal--wrapper > * { color:#000; }
@@ -35,7 +38,7 @@
   transition: color .3s ease, transform .3s ease;
 }
 
-.modal_button_close:hover svg{
+.modal-button-close:hover svg{
   color:adjust-color($primary-color, $alpha: 1);
   transform: translateY(-1px) scale(1.03);
 }
@@ -51,5 +54,17 @@
 .modal--wrapper input {
   border-color:$primary-color;
   color:$primary-color;
+}
+
+@keyframes slideInTop {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
