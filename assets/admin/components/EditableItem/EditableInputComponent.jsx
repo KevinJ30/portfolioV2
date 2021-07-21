@@ -41,27 +41,29 @@ export function EditableInput(props) {
         switch(props.type) {
             case 'textarea':
                 return <div className="form-group">
-                            <label htmlFor={props.label_id}>{props.label}</label>
+                            <label htmlFor={props.label_id} className={"visually-hidden"}>{props.label}</label>
                             <textarea
                                 id={props.label_id}
                                 placeholder={props.placeholder}
                                 className={props.classname}
                                 onChange={handleValueChange}
                                 onKeyUp={handleAction}
-                                autoFocus={true}>
-                                {value}
+                                autoFocus={true} value={value}>
                             </textarea>
                         </div>;
             default:
-                return <input
-                    id={props.label_id}
-                    type={props.value_type}
-                    placeholder={props.placeholder}
-                    onChange={handleValueChange}
-                    value={value}
-                    onKeyUp={handleAction}
-                    autoFocus={true}
-                    className={props.classname} />
+                return <div className="form-group">
+                    <label htmlFor={props.label_id} className={"visually-hidden"}>{props.label}</label>
+                    <input
+                        id={props.label_id}
+                        type={props.value_type}
+                        placeholder={props.placeholder}
+                        onChange={handleValueChange}
+                        value={value}
+                        onKeyUp={handleAction}
+                        autoFocus={true}
+                        className={props.classname} />
+                </div>
         }
     }
 
