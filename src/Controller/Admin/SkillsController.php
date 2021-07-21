@@ -33,6 +33,16 @@ class SkillsController extends AbstractController
     }
 
     /**
+     * @route("/", methods={"POST"}, name="CREATE")
+     **/
+    public function create(Request $request) : JsonResponse {
+        //var_dump('kevin'); die;
+        return $this->json([
+            'message' => 'Super',
+        ], Response::HTTP_OK);
+    }
+
+    /**
      * @Route("/{id}", methods={"POST", "PUT"}, name="UPDATE")
      **/
     public function update(Request $request, int $id, SkillsRepository $skillsRepository, EntityManagerInterface $entityManager) : JsonResponse {

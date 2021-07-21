@@ -4,7 +4,14 @@
         <div class="section">
             <div class="container">
                 <h1>Administrer les compétences</h1>
-                <a href="#" class="btn btn-primary mb-2">Ajouter une compétences</a>
+
+                <modal-dialog modal_title="Créer la compétence" button_text="Ajouter une compétence">
+                    <form-add-skill url_action={{ path('ADMIN_SKILLS_CREATE') }}></form-add-skill>
+                </modal-dialog>
+
+                <modal-dialog modal_title="Information importante" button_text="Détails">
+                    Information sur la box
+                </modal-dialog>
                 <table>
                     <thead>
                         <tr>
