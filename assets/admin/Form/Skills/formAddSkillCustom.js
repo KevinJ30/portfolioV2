@@ -1,14 +1,14 @@
 import React from 'react';
 import {render, unmountComponentAtNode} from "react-dom";
-import {EditableItem} from "./EditableItemComponent";
+import {FormAddSkill} from "./FormAddSkill";
 
-export default class EditableItemCustomElements extends HTMLElement {
+export default class FormAddSkillCustom extends HTMLElement {
     /**
      * Connection du composant
      **/
     connectedCallback() {
         const props = Object.values(this.attributes).map(attribute => [attribute.name, attribute.value])
-        this.component = <EditableItem {...Object.fromEntries(props)} />
+        this.component = <FormAddSkill {...Object.fromEntries(props)} />;
         render(this.component , this);
     }
 
@@ -16,9 +16,6 @@ export default class EditableItemCustomElements extends HTMLElement {
      * déconnection du composant
      **/
     disconnectedCallback () {
-        unmountComponentAtNode(this.component);
+        unmountComponentAtNode(this);
     }
 }
-
-customElements.define('editable-item', EditableItemCustomElements)
-
