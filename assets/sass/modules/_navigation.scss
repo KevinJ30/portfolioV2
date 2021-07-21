@@ -1,0 +1,21 @@
+.navigation {
+    margin-top: space(4, 8);
+    width:100%;
+}
+
+.nav {
+  display:flex;
+  list-style: none outside none;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nav > .nav__item { padding-right: space(3, 8); }
+
+.nav .nav__link {
+    font-family: 'Rochester', cursive;
+    font-size:1.25em;
+    color:rgba(239, 239, 240, 0.7);
+    transition:color .3s;
+}
+.nav .nav__link:hover { color:$light-color;}

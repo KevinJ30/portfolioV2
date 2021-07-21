@@ -35,12 +35,22 @@ class Projects
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $thumb;
+    private $thumb_url;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $created;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $excerpt;
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $details;
 
     public function __construct() {
         $this->setCreated(new \DateTimeImmutable());
@@ -87,14 +97,14 @@ class Projects
         return $this;
     }
 
-    public function getThumb(): ?string
+    public function getthumb_url(): ?string
     {
-        return $this->thumb;
+        return $this->thumb_url;
     }
 
-    public function setThumb(string $thumb): self
+    public function setthumb_url(string $thumb): self
     {
-        $this->thumb = $thumb;
+        $this->thumb_url = $thumb;
 
         return $this;
     }
@@ -107,6 +117,35 @@ class Projects
     public function setCreated(\DateTimeInterface $created): self
     {
         $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExcerpt() : string
+    {
+        return $this->excerpt;
+    }
+
+    /**
+     * @param mixed $excerpt
+     */
+    public function setExcerpt(string $excerpt): self
+    {
+        $this->excerpt = $excerpt;
+        return $this;
+    }
+
+    public function getDetails(): ?string
+    {
+        return $this->details;
+    }
+
+    public function setDetails(string $details): self
+    {
+        $this->details = $details;
 
         return $this;
     }

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ site_title }}{% endblock %}
+
+{% block body %}
+    <main class="page page-home">
+        <div class="section section_home">
+            <div class="container">
+                {% include 'home/partials/section_introduction.html.twig' %}
+            </div>
+        </div>
+
+        <div class="section section_skills">
+            <div class="container">
+                {% include 'home/partials/section_skills.html.twig' %}
+            </div>
+        </div>
+
+        <div class="section section_projects">
+            <div class="container">
+                {% include 'home/partials/section_projects.html.twig' %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

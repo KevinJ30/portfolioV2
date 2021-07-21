@@ -1,0 +1,31 @@
+@use "sass:math";
+
+/**
+ * Heading
+ **/
+
+// Generation of different typographies
+@include headers(1, 0.2, 5);
+
+h1, h2, h3, h4, h5 {
+  font-family: $font-secondary;
+  font-weight:400;
+}
+
+ul {
+  list-style: disc inside;
+}
+
+ul li {
+  padding:8px 0;
+}
+
+a {
+  border-bottom: 1px solid $light-color;
+  text-decoration: none;
+  color: $light-color;
+}
+
+.text-align-center {
+  text-align: center;
+}

@@ -19,6 +19,20 @@ class ProjectsRepository extends ServiceEntityRepository
         parent::__construct($registry, Projects::class);
     }
 
+    /**
+     * Retourne la liste des 4 derniers projets
+     *
+     * @param int $number Nombre de projet
+     * @return int|mixed|string
+     */
+    public function getLastProjects(int $number) {
+        return $this->createQueryBuilder('p')
+                    ->orderBy('p.created', 'desc')
+                    ->setMaxResults($number)
+                    ->getQuery()
+                    ->execute();
+    }
+
     // /**
     //  * @return Projects[] Returns an array of Projects objects
     //  */

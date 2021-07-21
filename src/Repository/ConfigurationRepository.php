@@ -19,6 +19,16 @@ class ConfigurationRepository extends ServiceEntityRepository
         parent::__construct($registry, Configuration::class);
     }
 
+    public function getConfigurationHome() {
+        return $this->createQueryBuilder('c')
+                    ->orWhere('c.name = \'site_title\'')
+                    ->orWhere('c.name = \'svg_introduction\'')
+                    ->orWhere('c.name = \'introduction\'')
+                    ->orderBy('c.name', 'desc')
+                    ->getQuery()
+                    ->execute();
+    }
+
     // /**
     //  * @return Configuration[] Returns an array of Configuration objects
     //  */

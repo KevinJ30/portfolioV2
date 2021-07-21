@@ -1,0 +1,13 @@
+.icon svg {
+  display:inline-block;
+  height: 18px;
+  width: 18px;
+}
+
+.icon .icon-stars {
+  color:$primary-color;
+}
+
+.icon.icon-stars.active {
+  color:#a66737;
+}
