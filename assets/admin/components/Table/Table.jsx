@@ -1,20 +1,17 @@
 import React from 'react';
+import {TableHead} from "./TableHead";
+import {DataGrid} from "./DataGrid";
 
-export function Table() {
-    return <Table>
-        <thead>
-            <tr>
-                <th>Nom de la compétences</th>
-                <th>Niveau de la compétences</th>
-                <th>Icone de la compétence</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>React</td>
-                <td>5</td>
-                <td>HTML</td>
-            </tr>
-        </tbody>
-    </Table>;
+export function Table({fields, data, displayDataNumber}) {
+    return <React.Fragment>
+        <table className={"table"}>
+            <TableHead data={fields} />
+            <DataGrid fields={fields} data={data} />
+            <tfoot>
+                <tr>
+                    <td colSpan={data.length}>Il y a {data.length} élements.</td>
+                </tr>
+            </tfoot>
+        </table>
+    </React.Fragment>
 }
