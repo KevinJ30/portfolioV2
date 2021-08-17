@@ -19,18 +19,18 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
  **/
 class SkillsController extends AbstractController
 {
-    /**
-     * @Route("/", name="home")
-     */
-    public function index(Request $request, SkillsRepository $skillsRepository): Response
-    {
-        $skills = $skillsRepository->findAll();
-
-        return $this->render('admin/skills/index.html.twig', [
-            'controller_name' => 'Admin/SkillsController',
-            'skills' => $skills
-        ]);
-    }
+//    /**
+//     * @Route("/", name="home")
+//     */
+//    public function index(Request $request, SkillsRepository $skillsRepository): Response
+//    {
+//        $skills = $skillsRepository->findAll();
+//
+//        return $this->render('admin/skills/index.html.twig', [
+//            'controller_name' => 'Admin/SkillsController',
+//            'skills' => $skills
+//        ]);
+//    }
 
     /**
      * @route("/", methods={"POST"}, name="CREATE")
