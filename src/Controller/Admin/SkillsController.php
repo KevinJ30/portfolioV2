@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Skills;
+use App\Form\Skill\CreateType;
 use App\Repository\SkillsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,8 +37,14 @@ class SkillsController extends AbstractController
      * @route("/create", name="CREATE")
      **/
     public function create() : Response {
-        // Création du formulaire
-        return $this->render('admin/skills/create.html.twig', []);
+        $skill = new Skills();
+        $skill->setType('None');
+
+        $form = $this->createForm(CreateType::class, $skill);
+
+        return $this->render('admin/skills/create.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
