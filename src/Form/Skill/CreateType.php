@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * Class CreateType
@@ -29,30 +30,33 @@ class CreateType extends AbstractType {
             ->add('name', TextType::class, [
                 'label' => 'Nom de la compétence',
                 'attr' => [
-                    'placeholder' => 'Saisissez le nom de la compétence'
+                    'placeholder' => 'Saisissez le nom de la compétence',
+                    'class' => 'mb-3'
                 ]
             ])
             ->add('level', NumberType::class, [
-                'label' => 'Niveau de maitrise'
+                'label' => 'Niveau de maitrise',
+                'attr' => [
+                    'class' => 'mb-3'
+                ]
             ])
             ->add('type', TextType::class, [
                 'label' => 'Type de la compétence',
                 'attr' => [
-                    'placeholder' => 'Saisissez le type'
+                    'placeholder' => 'Saisissez le type',
+                    'class' => 'mb-3'
                 ]
             ])
             ->add('icons', TextareaType::class, [
                 'label' => 'Ajouter le code SVG de la coméptence',
                 'attr' => [
-                    'placeholder' => '<svg ...>'
+                    'placeholder' => '<svg ...>',
+                    'class' => 'mb-3'
                 ]
             ])
 
             ->add('submit', SubmitType::class, [
-                'label' => 'Créer la compétence',
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ]
+                'label' => 'Créer la compétence'
             ]);
     }
 

@@ -1,78 +1,21 @@
 {% extends 'admin.html.twig' %}
-{% block body %}
-    <main class="page page-admin_skills" xmlns="http://www.w3.org/1999/html">
-        <div class="section">
-            <div class="container">
-                <h1>Administrer les compétences</h1>
 
-                <modal-dialog modal_title="Créer la compétence" button_text="Ajouter une compétence">
-                    <form-add-skill url_action={{ path('ADMIN_SKILLS_CREATE') }}></form-add-skill>
-                </modal-dialog>
+{% block title %}Gérer vos compétences{% endblock %}
 
-                <modal-dialog modal_title="Information importante" button_text="Détails">
-                    Information sur la box
-                </modal-dialog>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Level</th>
-                            <th>Type</th>
-                            <th>Icons</th>
-                        </tr>
-                    </thead>
+{% block content %}
+    <div class="container-fluid">
 
-                    <tbody>
-                    {%  for skill in skills %}
-                        <tr>
-                            <td>
-                                <editable-item
-                                        label_id="name"
-                                        label="Modifier le nom"
-                                        type="type"
-                                        value_type="text"
-                                        content="{{ skill.name }}"
-                                        url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}"
-                                        input_placeholder="Entrée le nom de la compétence" field="name"
-                                        classname="form-control"></editable-item>
-                            </td>
-                            <td>
-                                <editable-item
-                                        label_id="level"
-                                        label="Modifier le niveau de votre compétence"
-                                        content="{{ skill.level }}"
-                                        url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}"
-                                        input_placeholder="Saisissez le niveau de compétence"
-                                        field="level"
-                                        classname="form-control"></editable-item>
-                            </td>
-                            <td>
-                                <editable-item
-                                        label_id="type"
-                                        label="Modifier le type de votre compétences"
-                                        content="{{ skill.type }}"
-                                        url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}"
-                                        input_placeholder="Type de compétence"
-                                        field="type"
-                                        classname="form-control"></editable-item>
-                            </td>
-                            <td>
-                                <editable-item
-                                        label_id="icons"
-                                        label="Modifier l'icon de votre compétence"
-                                        type="textarea"
-                                        content="{{ skill.icons }}"
-                                        url_action="{{ path('ADMIN_SKILLS_UPDATE', {id: skill.id}) }}"
-                                        input_placeholder="Modifier l'icon"
-                                        field="icons"
-                                        classname="form-control">
-                                </editable-item>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+        <div class="row p-5">
+            <div class="col-md-2">
+                <h2 class="sidebar__title mb-3">Ajouter une compétence</h2>
+                {% include 'admin/skills/Form/create.html.twig' %}
+            </div>
+
+            <div class="col-md-9">
+                <h1 class="mb-3">Gérer vos compétences</h1>
+                {% include 'admin/skills/Elements/list.html.twig' %}
             </div>
         </div>
-    </main>
+
+    </div>
 {% endblock %}

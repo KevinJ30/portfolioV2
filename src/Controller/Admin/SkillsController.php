@@ -16,35 +16,56 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
- * @route("/Dashboard/Skill", name="ADMIN_SKILLS_")
+ * @route("/Dashboard/skill", name="ADMIN_SKILLS_")
  **/
 class SkillsController extends AbstractController
 {
-//    /**
-//     * @Route("/", name="home")
-//     */
-//    public function index(Request $request, SkillsRepository $skillsRepository): Response
-//    {
-//        $skills = $skillsRepository->findAll();
-//
-//        return $this->render('admin/skills/index.html.twig', [
-//            'controller_name' => 'Admin/SkillsController',
-//            'skills' => $skills
-//        ]);
-//    }
-
     /**
-     * @route("/create", name="CREATE")
-     **/
-    public function create() : Response {
+     * @route("/", name="HOME")
+     *
+     * @param SkillsRepository $skills
+     * @return Response
+     */
+    public function index(SkillsRepository $skills) : Response {
+        $skills = $skills->findAll();
+
         $skill = new Skills();
         $skill->setType('None');
 
-        $form = $this->createForm(CreateType::class, $skill);
-
-        return $this->render('admin/skills/create.html.twig', [
-            'form' => $form->createView()
+        $form = $this->createForm(CreateType::class, $skill, [
+            'action' => $this->generateUrl('ADMIN_SKILLS_CREATE')
         ]);
+
+        return $this->render('admin/skills/index.html.twig', [
+            'form' => $form->createView(),
+            'skills' => $skills
+        ]);
+    }
+
+    /**
+     * @route("/create", methods={"POST"}, name="CREATE")
+     * Créer une nouvelle compétence
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function create(Request $request, EntityManagerInterface $entityManager) : Response {
+        $skill = new Skills();
+
+        $form = $this->createForm(CreateType::class, $skill);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($form->getData());
+            $entityManager->flush();
+            $this->addFlash('success', 'La compétence a été ajouté');
+        }
+        else {
+            $this->addFlash('error', 'Impossible d\'ajouter la compétence.');
+        }
+
+        return $this->redirectToRoute('ADMIN_SKILLS_HOME');
     }
 
     /**
