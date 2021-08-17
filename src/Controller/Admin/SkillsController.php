@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
- * @route("/Admin/skills", name="ADMIN_SKILLS_")
+ * @route("/Dashboard/Skill", name="ADMIN_SKILLS_")
  **/
 class SkillsController extends AbstractController
 {
@@ -33,13 +33,11 @@ class SkillsController extends AbstractController
 //    }
 
     /**
-     * @route("/", methods={"POST"}, name="CREATE")
+     * @route("/create", name="CREATE")
      **/
-    public function create(Request $request) : JsonResponse {
-        //var_dump('kevin'); die;
-        return $this->json([
-            'message' => 'Super',
-        ], Response::HTTP_OK);
+    public function create() : Response {
+        // Création du formulaire
+        return $this->render('admin/skills/create.html.twig', []);
     }
 
     /**
