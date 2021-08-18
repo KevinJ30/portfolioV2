@@ -1,5 +1,14 @@
 import './sass/app.scss';
 
+import 'bootstrap/dist/js/bootstrap.min.js'
+
+/**
+ * CustomElements
+ **/
+import SkillEditCustomElement from './CustomElement/SkillEditCustomElement.js';
+
+customElements.define('skill-edit', SkillEditCustomElement)
+
 // /**
 //  * Dashboard APP react
 //  */
