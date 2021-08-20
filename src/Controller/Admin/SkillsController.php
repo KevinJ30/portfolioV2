@@ -8,6 +8,7 @@ use App\Repository\SkillsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,6 +60,7 @@ class SkillsController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($form->getData());
             $entityManager->flush();
+
             $this->addFlash('success', 'La compétence a été ajouté');
         }
         else {
@@ -95,6 +97,29 @@ class SkillsController extends AbstractController
         return $this->render('admin/skills/edit.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * Supprime une compétence
+     * @Route("/delete/{id}", name="DELETE", methods={"DELETE"})
+     * @param Request $request
+     * @param Skills $skill
+     * @return Response
+     **/
+    public function delete(Request $request, Skills $skill, EntityManagerInterface $entityManager) {
+        $submittedToken = $request->request->get('token');
+
+        if($this->isCsrfTokenValid('skill-delete', $submittedToken)) {
+            $entityManager->remove($skill);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'La compétence a été supprimé');
+        }
+        else {
+            $this->addFlash('error', 'Impossible de supprimer la compétence');
+        }
+
+        return $this->redirectToRoute('ADMIN_SKILLS_HOME');
     }
 
 //    /**

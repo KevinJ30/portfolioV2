@@ -12,10 +12,11 @@
 
     <title>Dashboard | {% block title %}{% endblock %}</title>
 </head>
+
 <body class="bg-light p-5">
-    <main class="page">
-        {% block content %}{% endblock %}
-    </main>
+    {% include 'elements/notifications/notifications.html.twig' %}
+
+    {% block content %}{% endblock %}
 
     {% block javascripts %}
         {{ encore_entry_script_tags('admin') }}
