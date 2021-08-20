@@ -1,0 +1,26 @@
+<table class="table table-bordered">
+    <thead>
+        <tr class="text-center align-middle">
+            <th>Nom de la compétence</th>
+            <th>Type de la compétence</th>
+            <th>Niveau de maitrise</th>
+            <th>Icones</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for skill in skills %}
+            <tr class="text-center align-middle">
+                <td>{{ skill.name }}</td>
+                <td>{{ skill.type }}</td>
+                <td>{{ skill.level }}</td>
+                <td><span class="thumb__skill">{{ skill.icons | raw }}</span></td>
+                <td>
+                    <a href="{{ path('ADMIN_SKILLS_EDIT', {id: skill.id}) }}" class="btn btn-primary">Modifier</a>
+                    <a href="#" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

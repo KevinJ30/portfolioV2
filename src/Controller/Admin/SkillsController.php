@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Skills;
+use App\Form\Skill\CreateType;
 use App\Repository\SkillsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,48 +16,102 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
- * @route("/Admin/skills", name="ADMIN_SKILLS_")
+ * @route("/Dashboard/skill", name="ADMIN_SKILLS_")
  **/
 class SkillsController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @route("/", name="HOME")
+     *
+     * @param SkillsRepository $skills
+     * @return Response
      */
-    public function index(Request $request, SkillsRepository $skillsRepository): Response
-    {
-        $skills = $skillsRepository->findAll();
+    public function index(SkillsRepository $skills) : Response {
+        $skills = $skills->findAll();
+
+        $skill = new Skills();
+        $skill->setType('None');
+
+        $form = $this->createForm(CreateType::class, $skill, [
+            'action' => $this->generateUrl('ADMIN_SKILLS_CREATE')
+        ]);
 
         return $this->render('admin/skills/index.html.twig', [
-            'controller_name' => 'Admin/SkillsController',
+            'form' => $form->createView(),
             'skills' => $skills
         ]);
     }
 
     /**
-     * @route("/", methods={"POST"}, name="CREATE")
-     **/
-    public function create(Request $request) : JsonResponse {
-        //var_dump('kevin'); die;
-        return $this->json([
-            'message' => 'Super',
-        ], Response::HTTP_OK);
+     * Créer une nouvelle compétence
+     *
+     * @route("/create", methods={"POST"}, name="CREATE")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function create(Request $request, EntityManagerInterface $entityManager) : Response {
+        $skill = new Skills();
+
+        $form = $this->createForm(CreateType::class, $skill);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($form->getData());
+            $entityManager->flush();
+            $this->addFlash('success', 'La compétence a été ajouté');
+        }
+        else {
+            $this->addFlash('error', 'Impossible d\'ajouter la compétence.');
+        }
+
+        return $this->redirectToRoute('ADMIN_SKILLS_HOME');
     }
 
     /**
-     * @Route("/{id}", methods={"POST", "PUT"}, name="UPDATE")
-     **/
-    public function update(Request $request, int $id, SkillsRepository $skillsRepository, EntityManagerInterface $entityManager) : JsonResponse {
-        $skill = $skillsRepository->find($id);
-        $data = json_decode($request->getContent());
-        $key = 'set'.ucfirst($data->key);
-        $skill->$key($data->value);
+     * Edition d'une compétence
+     *
+     * @route("/edit/{id}", name="EDIT")
+     * @param Request $request
+     * @param Skills $entity
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function edit(Request $request, Skills $entity, EntityManagerInterface $entityManager) : Response {
+        $form = $this->createForm(CreateType::class, $entity);
+        $form->handleRequest($request);
 
-        $entityManager->persist($skill);
-        $entityManager->flush();
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($entity);
+            $entityManager->flush();
 
-        return $this->json([
-            'message' => 'Les données ont été mise à jour...',
-            'data' => json_encode($skill)
-        ], Response::HTTP_OK);
+            $this->addFlash('success', 'La compétence a été modifier');
+            return $this->redirectToRoute('ADMIN_SKILLS_HOME');
+        }
+        else {
+            $this->addFlash('error', "Impossible de modifier la compétence");
+        }
+
+        return $this->render('admin/skills/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
+
+//    /**
+//     * @Route("/{id}", methods={"POST", "PUT"}, name="UPDATE")
+//     **/
+//    public function update(Request $request, int $id, SkillsRepository $skillsRepository, EntityManagerInterface $entityManager) : JsonResponse {
+//        $skill = $skillsRepository->find($id);
+//        $data = json_decode($request->getContent());
+//        $key = 'set'.ucfirst($data->key);
+//        $skill->$key($data->value);
+//
+//        $entityManager->persist($skill);
+//        $entityManager->flush();
+//
+//        return $this->json([
+//            'message' => 'Les données ont été mise à jour...',
+//            'data' => json_encode($skill)
+//        ], Response::HTTP_OK);
+//    }
 }

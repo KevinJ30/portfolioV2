@@ -1,0 +1,32 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %} Editer une compétence {% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="p-3 bg-white rounded-3 border shadow-sm">
+            <h1>Editer la compétence</h1>
+            <hr />
+
+            {{ form_start(form) }}
+
+            {{ form_row(form.name) }}
+
+            {{ form_row(form.level) }}
+
+            {{ form_row(form.type) }}
+
+            {{ form_row(form.icons) }}
+
+            {{
+                form_row(form.submit, {
+                    'label': 'Modifier la compétence'
+                })
+            }}
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}
