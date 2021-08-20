@@ -48,8 +48,7 @@ export function EditableInput(props) {
                                 className={props.classname}
                                 onChange={handleValueChange}
                                 onKeyUp={handleAction}
-                                autoFocus={true}>
-                                {value}
+                                autoFocus={true} value={value}>
                             </textarea>
                         </div>;
             default:
