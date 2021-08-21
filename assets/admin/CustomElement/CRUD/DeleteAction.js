@@ -20,6 +20,8 @@ export default class DeleteAction {
     handleActionDelete(event) {
         event.preventDefault();
 
+        this.view.setLoading(true);
+
         fetch(this.props.url_action, {
             method: 'DELETE',
             headers: {
@@ -31,13 +33,14 @@ export default class DeleteAction {
         })
             .then(response => response.json())
             .then(data => {
-                this.view.removeTableElement()
-                document.querySelector('.container-fluid').appendChild(alertSuccess(data.message));
+                this.view.removeTableElement();
+                this.view.alert('success', data.message);
+                this.view.setLoading(false);
             })
             .catch((error) => {
-                console.log(error)
+                this.view.alert('error', data.message);
+                this.view.setLoading(false);
             })
 
-        // this.view.removeTableElement();
     }
 }

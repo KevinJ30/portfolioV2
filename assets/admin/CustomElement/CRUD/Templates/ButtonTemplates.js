@@ -5,6 +5,15 @@ export class DeleteTemplate {
         this.buildButton();
     }
 
+    setLoading(state) {
+        if(state) {
+            this.element.innerHTML = "kevin";
+        }
+        else {
+            this.element.innerHTML = "<i class=\"bi bi-trash-fill\" role=\"img\" aria-label=\"Supprimer un élément\"></i>";
+        }
+    }
+
     /**
      * Construit le bouton suppréssion
      **/
