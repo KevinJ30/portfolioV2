@@ -17,13 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
+ * Gestion des compétences
+ *
  * @route("/Dashboard/skill", name="ADMIN_SKILLS_")
  **/
 class SkillsController extends AbstractController
 {
     /**
-     * @route("/", name="HOME")
+     * Affiche la liste des compétences
      *
+     * @route("/", name="HOME")
      * @param SkillsRepository $skills
      * @return Response
      */
@@ -71,7 +74,7 @@ class SkillsController extends AbstractController
     }
 
     /**
-     * Edition d'une compétence
+     * Editer une compétence
      *
      * @route("/edit/{id}", name="EDIT")
      * @param Request $request
@@ -90,9 +93,6 @@ class SkillsController extends AbstractController
             $this->addFlash('success', 'La compétence a été modifier');
             return $this->redirectToRoute('ADMIN_SKILLS_HOME');
         }
-        else {
-            $this->addFlash('error', "Impossible de modifier la compétence");
-        }
 
         return $this->render('admin/skills/edit.html.twig', [
             'form' => $form->createView()
@@ -100,7 +100,8 @@ class SkillsController extends AbstractController
     }
 
     /**
-     * Supprime une compétence
+     * Supprimer une compétence
+     *
      * @Route("/delete/{id}", name="DELETE", methods={"DELETE"})
      * @param Request $request
      * @param Skills $skill
@@ -121,22 +122,4 @@ class SkillsController extends AbstractController
 
         return $this->redirectToRoute('ADMIN_SKILLS_HOME');
     }
-
-//    /**
-//     * @Route("/{id}", methods={"POST", "PUT"}, name="UPDATE")
-//     **/
-//    public function update(Request $request, int $id, SkillsRepository $skillsRepository, EntityManagerInterface $entityManager) : JsonResponse {
-//        $skill = $skillsRepository->find($id);
-//        $data = json_decode($request->getContent());
-//        $key = 'set'.ucfirst($data->key);
-//        $skill->$key($data->value);
-//
-//        $entityManager->persist($skill);
-//        $entityManager->flush();
-//
-//        return $this->json([
-//            'message' => 'Les données ont été mise à jour...',
-//            'data' => json_encode($skill)
-//        ], Response::HTTP_OK);
-//    }
 }

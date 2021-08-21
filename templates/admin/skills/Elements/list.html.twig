@@ -17,10 +17,11 @@
                 <td>{{ skill.level }}</td>
                 <td><span class="thumb__skill">{{ skill.icons | raw }}</span></td>
                 <td>
-                    <a href="{{ path('ADMIN_SKILLS_EDIT', {id: skill.id}) }}" class="btn btn-primary">Modifier</a>
+
                     <form action="{{ path('ADMIN_SKILLS_DELETE', {id: skill.id }) }}" method="post">
                         <input type="hidden" name="_method" value="DELETE" />
                         <input type="hidden" name="token" value="{{ csrf_token('skill-delete') }}">
+                        <a href="{{ path('ADMIN_SKILLS_EDIT', {id: skill.id}) }}" class="btn btn-primary">Modifier</a>
                         <button type="submit" class="btn btn-danger">supprimer</button>
                     </form>
                 </td>
