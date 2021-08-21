@@ -6,9 +6,12 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 /**
  * CustomElements
  **/
-import SkillEditCustomElement from './CustomElement/SkillEditCustomElement.js';
+import CRUDActionDeleteCustomElement from './CustomElement/CRUD/CRUDActionDeleteCustomElement.js';
+customElements.define('crud-action-delete', CRUDActionDeleteCustomElement);
 
-customElements.define('skill-edit', SkillEditCustomElement)
+// import SkillEditCustomElement from './CustomElement/SkillEditCustomElement.js';
+//
+// customElements.define('skill-edit', SkillEditCustomElement)
 
 // /**
 //  * Dashboard APP react

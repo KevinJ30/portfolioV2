@@ -99,6 +99,31 @@ class SkillsController extends AbstractController
         ]);
     }
 
+//    /**
+//     * Supprimer une compétence
+//     *
+//     * @Route("/delete/{id}", name="DELETE", methods={"DELETE"})
+//     * @param Request $request
+//     * @param Skills $skill
+//     * @return Response
+//     **/
+//    public function delete(Request $request, Skills $skill, EntityManagerInterface $entityManager) {
+//        $submittedToken = $request->request->get('token');
+//
+//        if($this->isCsrfTokenValid('skill-delete', $submittedToken)) {
+//            $entityManager->remove($skill);
+//            $entityManager->flush();
+//
+//            $this->addFlash('success', 'La compétence a été supprimé');
+//        }
+//        else {
+//
+//            $this->addFlash('error', 'Impossible de supprimer la compétence');
+//        }
+//
+//        return $this->redirectToRoute('ADMIN_SKILLS_HOME');
+//    }
+
     /**
      * Supprimer une compétence
      *
@@ -107,19 +132,19 @@ class SkillsController extends AbstractController
      * @param Skills $skill
      * @return Response
      **/
-    public function delete(Request $request, Skills $skill, EntityManagerInterface $entityManager) {
-        $submittedToken = $request->request->get('token');
-
-        if($this->isCsrfTokenValid('skill-delete', $submittedToken)) {
+    public function delete(Request $request, Skills $skill, EntityManagerInterface $entityManager) : JsonResponse {
+        $submittedToken = json_decode($request->getContent());
+        if($this->isCsrfTokenValid('skill-delete', $submittedToken->token)) {
             $entityManager->remove($skill);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La compétence a été supprimé');
-        }
-        else {
-            $this->addFlash('error', 'Impossible de supprimer la compétence');
+            return $this->json([
+                'message' => 'La compétence a été supprimé.'
+            ], Response::HTTP_OK);
         }
 
-        return $this->redirectToRoute('ADMIN_SKILLS_HOME');
+        return $this->json([
+            'message' => 'Impossible de supprimer la compétence'
+        ], 500);
     }
 }
