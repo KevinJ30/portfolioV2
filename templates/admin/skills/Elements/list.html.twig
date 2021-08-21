@@ -21,8 +21,12 @@
                     <form action="{{ path('ADMIN_SKILLS_DELETE', {id: skill.id }) }}" method="post">
                         <input type="hidden" name="_method" value="DELETE" />
                         <input type="hidden" name="token" value="{{ csrf_token('skill-delete') }}">
-                        <a href="{{ path('ADMIN_SKILLS_EDIT', {id: skill.id}) }}" class="btn btn-primary">Modifier</a>
-                        <button type="submit" class="btn btn-danger">supprimer</button>
+                        <a href="{{ path('ADMIN_SKILLS_EDIT', {id: skill.id}) }}" class="btn btn-primary">
+                            <i class="bi bi-pencil-fill" role="img" aria-label="Modifier un élément"></i>
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash-fill" role="img" aria-label="Supprimer un élément"></i>
+                        </button>
                     </form>
                 </td>
             </tr>
