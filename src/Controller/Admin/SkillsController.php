@@ -23,22 +23,29 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
  **/
 class SkillsController extends CRUDController
 {
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        parent::__construct($entityManager);
+    /**
+     * @var string $entity Nom de la class de l'entité
+     **/
+    protected string $entity = Skills::class;
 
-        /**
-         * Configuration
-         **/
-        $this->setEntity(Skills::class);
-        $this->setTemplatePath('admin/skills');
+    /**
+     * @var string $templatePath Chemin vers les fichiers template
+     **/
+    protected string $templatePath = "admin/skills";
 
-        /**
-         * Actions
-         */
-        $this->addAction('edit', 'ADMIN_SKILLS_EDIT');
-        $this->addAction('delete', 'ADMIN_SKILLS_DELETE');
-    }
+    /**
+     * @var array $actions
+     **/
+    protected array $actions = [
+        'home' => 'ADMIN_SKILL_HOME',
+        'edit' => 'ADMIN_SKILLS_EDIT',
+        'delete' => 'ADMIN_SKILLS_DELETE'
+    ];
+
+    /**
+     * @var string $name Nom du CRUD
+     **/
+    protected string $name = "skill";
 
     /**
      * Affiche la liste des compétences
@@ -54,27 +61,10 @@ class SkillsController extends CRUDController
      * Créer une nouvelle compétence
      *
      * @route("/create", methods={"POST"}, name="CREATE")
-     * @param Request $request
-     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function create(Request $request, EntityManagerInterface $entityManager) : Response {
-        $skill = new Skills();
-
-        $form = $this->createForm(CreateType::class, $skill);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($form->getData());
-            $entityManager->flush();
-
-            $this->addFlash('success', 'La compétence a été ajouté');
-        }
-        else {
-            $this->addFlash('error', 'Impossible d\'ajouter la compétence.');
-        }
-
-        return $this->redirectToRoute('ADMIN_SKILLS_HOME');
+    public function create() : Response {
+        return $this->CRUDCreate(CreateType::class);
     }
 
     /**
@@ -109,21 +99,9 @@ class SkillsController extends CRUDController
      * @Route("/delete/{id}", name="DELETE", methods={"DELETE"})
      * @param Request $request
      * @param Skills $skill
-     * @return Response
+     * @return JsonResponse
      **/
-    public function delete(Request $request, Skills $skill, EntityManagerInterface $entityManager) : JsonResponse {
-        $submittedToken = json_decode($request->getContent());
-        if($this->isCsrfTokenValid('skill-delete', $submittedToken->token)) {
-            $entityManager->remove($skill);
-            $entityManager->flush();
-
-            return $this->json([
-                'message' => 'La compétence a été supprimé.'
-            ], Response::HTTP_OK);
-        }
-
-        return $this->json([
-            'message' => 'Impossible de supprimer la compétence'
-        ], 500);
+    public function delete(Skills $skill) : JsonResponse {
+        return $this->CRUDDelete($skill);
     }
 }
