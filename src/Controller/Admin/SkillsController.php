@@ -25,7 +25,19 @@ class SkillsController extends CRUDController
 {
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->setEntity(new Skills());
+        parent::__construct($entityManager);
+
+        /**
+         * Configuration
+         **/
+        $this->setEntity(Skills::class);
+        $this->setTemplatePath('admin/skills');
+
+        /**
+         * Actions
+         */
+        $this->addAction('edit', 'ADMIN_SKILLS_EDIT');
+        $this->addAction('delete', 'ADMIN_SKILLS_DELETE');
     }
 
     /**
@@ -35,20 +47,7 @@ class SkillsController extends CRUDController
      * @return Response
      */
     public function index() : Response {
-        parent::index();
-//        $skills = $skills->findAll();
-//
-//        $skill = new Skills();
-//        $skill->setType('None');
-//
-//        $form = $this->createForm(CreateType::class, $skill, [
-//            'action' => $this->generateUrl('ADMIN_SKILLS_CREATE')
-//        ]);
-//
-//        return $this->render('admin/skills/index.html.twig', [
-//            'form' => $form->createView(),
-//            'skills' => $skills
-//        ]);
+        return $this->CRUDIndex(CreateType::class);
     }
 
     /**

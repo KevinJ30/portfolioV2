@@ -5,23 +5,33 @@
             <th>Type de la compétence</th>
             <th>Niveau de maitrise</th>
             <th>Icones</th>
-            <th>Actions</th>
+            {% if actions|length > 0 %}
+                <th>Actions</th>
+            {% endif %}
         </tr>
     </thead>
 
     <tbody>
-        {% for skill in skills %}
-            <tr data-id="{{ skill.id }}" class="text-center align-middle">
-                <td>{{ skill.name }}</td>
-                <td>{{ skill.type }}</td>
-                <td>{{ skill.level }}</td>
-                <td><span class="thumb__skill">{{ skill.icons | raw }}</span></td>
-                <td>
-                    <a href="{{ path('ADMIN_SKILLS_EDIT', {id: skill.id}) }}" class="btn btn-primary">
-                        <i class="bi bi-pencil-fill" role="img" aria-label="Modifier un élément"></i>
-                    </a>
-                    <crud-action-delete url_action="{{ path('ADMIN_SKILLS_DELETE', {id: skill.id}) }}" element_id="{{ skill.id }}" token="{{ csrf_token('skill-delete') }}"></crud-action-delete>
-                </td>
+        {% for item in data %}
+            <tr data-id="{{ item.id }}" class="text-center align-middle">
+                <td>{{ item.name }}</td>
+                <td>{{ item.type }}</td>
+                <td>{{ item.level }}</td>
+                <td><span class="thumb__skill">{{ item.icons | raw }}</span></td>
+
+                {% if actions|length > 0 %}
+                    <td class="actions">
+                        {% if actions.edit is defined %}
+                            <a href="{{ path(actions.edit, {id: item.id}) }}" class="btn btn-primary">
+                                <i class="bi bi-pencil-fill" role="img" aria-label="Modifier un élément"></i>
+                            </a>
+                        {% endif %}
+
+                        {% if actions.delete is defined %}
+                            <crud-action-delete url_action="{{ path(actions.delete, {id: item.id}) }}" element_id="{{ item.id }}" token="{{ csrf_token('item-delete') }}"></crud-action-delete>
+                        {% endif %}
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </tbody>
