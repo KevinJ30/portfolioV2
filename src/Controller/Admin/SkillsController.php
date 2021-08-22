@@ -21,29 +21,34 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
  *
  * @route("/Dashboard/skill", name="ADMIN_SKILLS_")
  **/
-class SkillsController extends AbstractController
+class SkillsController extends CRUDController
 {
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->setEntity(new Skills());
+    }
+
     /**
      * Affiche la liste des compétences
      *
      * @route("/", name="HOME")
-     * @param SkillsRepository $skills
      * @return Response
      */
-    public function index(SkillsRepository $skills) : Response {
-        $skills = $skills->findAll();
-
-        $skill = new Skills();
-        $skill->setType('None');
-
-        $form = $this->createForm(CreateType::class, $skill, [
-            'action' => $this->generateUrl('ADMIN_SKILLS_CREATE')
-        ]);
-
-        return $this->render('admin/skills/index.html.twig', [
-            'form' => $form->createView(),
-            'skills' => $skills
-        ]);
+    public function index() : Response {
+        parent::index();
+//        $skills = $skills->findAll();
+//
+//        $skill = new Skills();
+//        $skill->setType('None');
+//
+//        $form = $this->createForm(CreateType::class, $skill, [
+//            'action' => $this->generateUrl('ADMIN_SKILLS_CREATE')
+//        ]);
+//
+//        return $this->render('admin/skills/index.html.twig', [
+//            'form' => $form->createView(),
+//            'skills' => $skills
+//        ]);
     }
 
     /**
@@ -98,31 +103,6 @@ class SkillsController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
-//    /**
-//     * Supprimer une compétence
-//     *
-//     * @Route("/delete/{id}", name="DELETE", methods={"DELETE"})
-//     * @param Request $request
-//     * @param Skills $skill
-//     * @return Response
-//     **/
-//    public function delete(Request $request, Skills $skill, EntityManagerInterface $entityManager) {
-//        $submittedToken = $request->request->get('token');
-//
-//        if($this->isCsrfTokenValid('skill-delete', $submittedToken)) {
-//            $entityManager->remove($skill);
-//            $entityManager->flush();
-//
-//            $this->addFlash('success', 'La compétence a été supprimé');
-//        }
-//        else {
-//
-//            $this->addFlash('error', 'Impossible de supprimer la compétence');
-//        }
-//
-//        return $this->redirectToRoute('ADMIN_SKILLS_HOME');
-//    }
 
     /**
      * Supprimer une compétence
