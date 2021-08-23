@@ -1,0 +1,40 @@
+<table class="table table-crud table-bordered m-0">
+    <thead>
+        <tr class="text-center align-middle">
+            {% for value in fields %}
+                <th>{{ value }}</th>
+            {% endfor %}
+
+            {% if actions|length > 0 %}
+                <th>Actions</th>
+            {% endif %}
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in data %}
+            <tr data-id="{{ item.id }}" class="text-center">
+                {% for field, value in fields %}
+                <td>
+                    {{ item.get(field)|raw }}
+                </td>
+                {% endfor %}
+
+                {% if actions|length > 0 %}
+                    <td class="actions">
+                        {% if actions.edit is defined %}
+                            <a href="{{ path(actions.edit, {id: item.get('id')}) }}" class="btn btn-primary">
+                                <i class="bi bi-pencil-fill" role="img" aria-label="Modifier un élément"></i>
+                            </a>
+                        {% endif %}
+
+                        {% if actions.delete is defined %}
+                            <crud-action-delete url_action="{{ path(actions.delete, {id: item.get('id')}) }}" element_id="{{ item.id }}" token="{{ csrf_token('item-delete') }}"></crud-action-delete>
+                        {% endif %}
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+
+    </tbody>
+</table>

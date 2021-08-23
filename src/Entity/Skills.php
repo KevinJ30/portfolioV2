@@ -8,37 +8,38 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=SkillsRepository::class)
  */
-class Skills
+class Skills extends AbstractEntity
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $icons;
+    private string $icons;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $level;
+    private int $level;
 
     /**
      * @ORM\Column(type="string", length=100)
      **/
-    private $type;
+    private string $type;
 
     public function __construct() {
         $this->setLevel(0);
+        $this->setType('None');
     }
 
     public function getId(): ?int

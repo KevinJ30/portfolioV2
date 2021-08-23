@@ -1,0 +1,28 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %} Editer une compétence {% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="p-3 bg-white rounded-3 border shadow-sm">
+            <h1>Editer l'utilisateur</h1>
+            <hr />
+
+            {{ form_start(form) }}
+
+            {{ form_row(form.email) }}
+
+            {{ form_row(form.roles) }}
+
+            {{
+                form_row(form.submit, {
+                    'label': "Modifier l'utilisateur"
+                })
+            }}
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}
