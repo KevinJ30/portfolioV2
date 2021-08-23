@@ -3,60 +3,85 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Skills;
-use App\Repository\SkillsRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Form\Skill\CreateType;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
- * @route("/Admin/skills", name="ADMIN_SKILLS_")
+ * Gestion des compétences
+ *
+ * @route("/Dashboard/skill", name="ADMIN_SKILLS_")
  **/
-class SkillsController extends AbstractController
+class SkillsController extends CRUDController
 {
     /**
-     * @Route("/", name="home")
+     * @var string $entity Nom de la class de l'entité
+     **/
+    protected string $entity = Skills::class;
+
+    /**
+     * @var string $templatePath Chemin vers les fichiers template
+     **/
+    protected string $templatePath = "admin/skills";
+
+    /**
+     * @var array $actions Les actions des compétences
+     **/
+    protected array $actions = [
+        'home' => 'ADMIN_SKILLS_HOME',
+        'create' => 'ADMIN_SKILLS_CREATE',
+        'edit' => 'ADMIN_SKILLS_EDIT',
+        'delete' => 'ADMIN_SKILLS_DELETE'
+    ];
+
+    /**
+     * @var string $name Nom du CRUD
+     **/
+    protected string $name = "skill";
+
+    /**
+     * Affiche la liste des compétences
+     *
+     * @route("/", name="HOME")
+     *
+     * @return Response
      */
-    public function index(Request $request, SkillsRepository $skillsRepository): Response
-    {
-        $skills = $skillsRepository->findAll();
-
-        return $this->render('admin/skills/index.html.twig', [
-            'controller_name' => 'Admin/SkillsController',
-            'skills' => $skills
-        ]);
+    public function index() : Response {
+        return $this->CRUDIndex(CreateType::class, ['name' => 'Nom de la compétences', 'type' => 'Type', 'level' => 'Niveau de la compétence', 'icons' => 'Icon de la compétence']);
     }
 
     /**
-     * @route("/", methods={"POST"}, name="CREATE")
-     **/
-    public function create(Request $request) : JsonResponse {
-        //var_dump('kevin'); die;
-        return $this->json([
-            'message' => 'Super',
-        ], Response::HTTP_OK);
+     * Créer une nouvelle compétence
+     *
+     * @route("/create", methods={"POST"}, name="CREATE")
+     * @return Response
+     */
+    public function create() : Response {
+        return $this->CRUDCreate(CreateType::class);
     }
 
     /**
-     * @Route("/{id}", methods={"POST", "PUT"}, name="UPDATE")
+     * Éditer une compétence
+     *
+     * @route("/edit/{id}", name="EDIT")
+     *
+     * @param Skills $skills Entité compétence
+     * @return Response
+     */
+    public function edit(Skills $skills) : Response {
+        return $this->CRUDEdit(CreateType::class, $skills);
+    }
+
+    /**
+     * Supprimer une compétence
+     *
+     * @Route("/delete/{id}", name="DELETE", methods={"DELETE"})
+     *
+     * @param Skills $skill
+     * @return JsonResponse
      **/
-    public function update(Request $request, int $id, SkillsRepository $skillsRepository, EntityManagerInterface $entityManager) : JsonResponse {
-        $skill = $skillsRepository->find($id);
-        $data = json_decode($request->getContent());
-        $key = 'set'.ucfirst($data->key);
-        $skill->$key($data->value);
-
-        $entityManager->persist($skill);
-        $entityManager->flush();
-
-        return $this->json([
-            'message' => 'Les données ont été mise à jour...',
-            'data' => json_encode($skill)
-        ], Response::HTTP_OK);
+    public function delete(Skills $skill) : JsonResponse {
+        return $this->CRUDDelete($skill);
     }
 }

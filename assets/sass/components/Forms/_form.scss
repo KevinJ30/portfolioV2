@@ -18,3 +18,22 @@
     border:1px solid $light-color;
     color: $light-color;
 }
+
+.form-row {
+    width:100%;
+    display:flex;
+    align-items: stretch;
+}
+
+.form-row > .form-group:first-child {
+    margin-left:0;
+}
+
+.form-row > .form-group:last-child {
+    margin-right:0;
+}
+
+.form-row > .form-group {
+    margin:0 4px;
+    flex:1;
+}
