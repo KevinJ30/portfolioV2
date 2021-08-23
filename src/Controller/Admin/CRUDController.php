@@ -52,26 +52,27 @@ class CRUDController extends AbstractController {
      * Affiche les données du CRUD dans un tableaux
      * et définie des actions pour le CRUD
      *
-     * @param string $formType : Formulaire type syfmony
+     * @param string $formType
+     * @param array $fields
      * @return Response
      */
-    public function CRUDIndex(string $formType) : Response {
+    public function CRUDIndex(string $formType, array $fields) : Response {
         $data = $this->getRepository()->findAll();
         $form = $this->createForm($formType, new $this->entity(), [
-            'action' => $this->generateUrl('ADMIN_SKILLS_CREATE')
+            'action' => $this->generateUrl($this->actions['create'])
         ]);
 
         return $this->render($this->templatePath . '/index.html.twig', [
             'form' => $form->createView(),
             'data' => $data,
-            'actions' => $this->getActions()
+            'actions' => $this->getActions(),
+            'fields' => $fields
         ]);
     }
 
     // create
     public function CRUDCreate(string $formType) : Response {
         $entity = new $this->entity();
-
         $form = $this->createForm($formType, $entity);
         $form->handleRequest($this->requestStack->getCurrentRequest());
 

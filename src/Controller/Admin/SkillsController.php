@@ -4,17 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Skills;
 use App\Form\Skill\CreateType;
-use App\Repository\SkillsRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
  * Gestion des compétences
@@ -38,6 +30,7 @@ class SkillsController extends CRUDController
      **/
     protected array $actions = [
         'home' => 'ADMIN_SKILLS_HOME',
+        'create' => 'ADMIN_SKILLS_CREATE',
         'edit' => 'ADMIN_SKILLS_EDIT',
         'delete' => 'ADMIN_SKILLS_DELETE'
     ];
@@ -55,7 +48,7 @@ class SkillsController extends CRUDController
      * @return Response
      */
     public function index() : Response {
-        return $this->CRUDIndex(CreateType::class);
+        return $this->CRUDIndex(CreateType::class, ['name' => 'Nom de la compétences', 'type' => 'Type', 'level' => 'Niveau de la compétence', 'icons' => 'Icon de la compétence']);
     }
 
     /**
@@ -69,7 +62,7 @@ class SkillsController extends CRUDController
     }
 
     /**
-     * Editer une compétence
+     * Éditer une compétence
      *
      * @route("/edit/{id}", name="EDIT")
      *

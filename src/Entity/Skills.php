@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=SkillsRepository::class)
  */
-class Skills
+class Skills extends AbstractEntity
 {
     /**
      * @ORM\Id

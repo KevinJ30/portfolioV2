@@ -38,7 +38,7 @@ export default class DeleteAction {
                 this.view.setLoading(false);
             })
             .catch((error) => {
-                this.view.alert('error', data.message);
+                this.view.alert('error', error.message);
                 this.view.setLoading(false);
             })
 
