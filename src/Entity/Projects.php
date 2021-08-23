@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ProjectsRepository::class)
  */
-class Projects
+class Projects extends AbstractEntity
 {
     /**
      * @ORM\Id
@@ -35,7 +35,7 @@ class Projects
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $thumb_url;
+    private $thumb;
 
     /**
      * @ORM\Column(type="datetime")
@@ -97,14 +97,14 @@ class Projects
         return $this;
     }
 
-    public function getthumb_url(): ?string
+    public function getThumb(): ?string
     {
-        return $this->thumb_url;
+        return $this->thumb;
     }
 
-    public function setthumb_url(string $thumb): self
+    public function setThumb(string $thumb): self
     {
-        $this->thumb_url = $thumb;
+        $this->thumb = $thumb;
 
         return $this;
     }
