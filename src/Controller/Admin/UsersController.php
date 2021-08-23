@@ -86,11 +86,28 @@ class UsersController extends CRUDController {
      *
      * @route("/edit/{id}", name="EDIT")
      *
+     * @param Request $request
+     * @param UserPasswordHasherInterface $passwordHasher
      * @param User $user
      * @return Response
      */
-    public function edit(User $user) : Response {
-        return $this->CRUDEdit(UsersType::class, $user);
+    public function edit(Request $request, UserPasswordHasherInterface $passwordHasher, User $user) : Response {
+        $form = $this->createForm(UsersType::class, $user);
+        $form->remove('password');
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'La compétence a été modifier');
+            return $this->redirectToRoute($this->actions['home']);
+        }
+
+        return $this->render($this->templatePath . '/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**

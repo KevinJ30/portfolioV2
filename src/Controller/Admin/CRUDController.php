@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -72,18 +73,17 @@ class CRUDController extends AbstractController {
 
     // create
     public function CRUDCreate(string $formType) : Response {
+        $request = $this->requestStack->getCurrentRequest();
         $entity = new $this->entity();
         $form = $this->createForm($formType, $entity);
-        $form->handleRequest($this->requestStack->getCurrentRequest());
+
+        $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($form->getData());
+            $this->entityManager->persist($entity);
             $this->entityManager->flush();
-
-            $this->addFlash('success', 'La compétence a été ajouté');
-        }
-        else {
-            $this->addFlash('error', 'Impossible d\'ajouter la compétence.');
+            $this->addFlash('success', 'La compétence a été crée');
+            return $this->redirectToRoute($this->actions['home']);
         }
 
         return $this->redirectToRoute($this->actions['home']);
@@ -99,13 +99,13 @@ class CRUDController extends AbstractController {
     public function CRUDEdit(string $formType, Object $entity) : Response {
         $request = $this->requestStack->getCurrentRequest();
         $form = $this->createForm($formType, $entity);
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($entity);
             $this->entityManager->flush();
-
-            $this->addFlash('success', 'La compétence a été modifier');
+            $this->addFlash('success', 'La compétence a été modifiée');
             return $this->redirectToRoute($this->actions['home']);
         }
 

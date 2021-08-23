@@ -37,7 +37,8 @@ class UsersType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Mot de passe',
                     'class' => 'mb-3'
-                ]
+                ],
+                'required' => false
             ])
 
             ->add('submit', SubmitType::class, [
