@@ -106,7 +106,8 @@ class UsersController extends CRUDController {
         }
 
         return $this->render($this->templatePath . '/edit.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'name' => $this->name
         ]);
     }
 

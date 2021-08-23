@@ -13,8 +13,9 @@
     <title>Dashboard | {% block title %}{% endblock %}</title>
 </head>
 
-<body class="bg-light p-3">
+<body class="bg-light">
     {% include 'elements/notifications/notifications.html.twig' %}
+    {% include 'admin/element/navbar.html.twig' %}
 
     {% block content %}{% endblock %}
 
