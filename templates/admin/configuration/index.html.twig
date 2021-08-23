@@ -1,0 +1,23 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Gérer les configurations{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1 class="text-center pb-3">Gérer les configurations</h1>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="p-3 bg-white rounded-3 border shadow-sm">
+                    <h2 class="sidebar__title mb-3">Ajouter une configuration</h2>
+                    {% include 'admin/form/create.html.twig' %}
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <div class="bg-white rounded-3 shadow-sm">
+                    {% include 'admin/element/list.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

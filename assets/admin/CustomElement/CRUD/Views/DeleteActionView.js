@@ -14,10 +14,10 @@ export class DeleteActionView {
 
     alert(type, message) {
         if(type === 'success') {
-            document.querySelector('.container-fluid').appendChild(alertSuccess(message))
+            document.querySelector('#alert').appendChild(alertSuccess(message))
         }
         else if(type === 'error') {
-            document.querySelector('.container-fluid').appendChild(alertError(message))
+            document.querySelector('#alert').appendChild(alertError(message))
         }
     }
 
