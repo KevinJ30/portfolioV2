@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Form\Skill\CreateType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -87,12 +88,30 @@ class CRUDController extends AbstractController {
         return $this->redirectToRoute($this->actions['home']);
     }
 
-    // edit
-    public function CRUDEdit() : Response {
+    /**
+     * Édite une compétence
+     *
+     * @param string $formType
+     * @param Object $entity
+     * @return Response
+     */
+    public function CRUDEdit(string $formType, Object $entity) : Response {
+        $request = $this->requestStack->getCurrentRequest();
+        $form = $this->createForm($formType, $entity);
+        $form->handleRequest($request);
 
+        if($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($entity);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'La compétence a été modifier');
+            return $this->redirectToRoute($this->actions['home']);
+        }
+
+        return $this->render($this->templatePath . '/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
-
-    // delete
 
     /**
      * Supprime un item
@@ -118,19 +137,19 @@ class CRUDController extends AbstractController {
         ], 500);
     }
 
-    public function getEntity() : string {
+    protected function getEntity() : string {
         return $this->entity;
     }
 
-    public function setEntity(string $entity) {
+    protected function setEntity(string $entity) {
         $this->entity = $entity;
     }
 
-    public function getRepository() : ObjectRepository {
+    protected function getRepository() : ObjectRepository {
         return $this->entityManager->getRepository($this->entity);
     }
 
-    public function setTemplatePath(string $path) : void {
+    protected function setTemplatePath(string $path) : void {
         $this->templatePath = $path;
     }
 
