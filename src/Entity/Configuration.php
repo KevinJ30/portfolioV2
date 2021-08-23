@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ConfigurationRepository::class)
  */
-class Configuration
+class Configuration extends AbstractEntity
 {
     /**
      * @ORM\Id

@@ -9,8 +9,13 @@
                 <li class="nav-item">
                     <a class="nav-link {{ name is defined and name == 'skill' ? 'active' : ''  }}" aria-current="page" href="{{ path('ADMIN_SKILLS_HOME') }}">Compétences</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link {{ name is defined and name == 'users' ? 'active' : ''  }}" href="{{ path('ADMIN_USERS_HOME') }}">Utilisateurs</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ name is defined and name == 'configuration' ? 'active' : ''  }}" href="{{ path('ADMIN_CONFIGURATION_HOME') }}">Configuration</a>
                 </li>
             </ul>
         </div>
