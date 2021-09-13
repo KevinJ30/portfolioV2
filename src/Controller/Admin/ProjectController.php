@@ -6,7 +6,9 @@ use App\Entity\Configuration;
 use App\Entity\Projects;
 use App\Form\ConfigurationType;
 use App\Form\ProjectType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -59,11 +61,25 @@ class ProjectController extends CRUDController {
     /**
      * Créer un nouveau projet
      *
-     * @route("/create", methods={"POST"}, name="CREATE")
+     * @route("/create", methods={"GET", "POST"}, name="CREATE")
      * @return Response
      */
-    public function create() : Response {
-        return $this->CRUDCreate(ProjectType::class);
+    public function create(Request $request, EntityManagerInterface $entityManager) : Response {
+        $project = new Projects();
+        $form = $this->createForm(ProjectType::class, $project);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($project);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('ADMIN_PROJECT_HOME');
+        }
+
+        return $this->render('admin/project/create.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**

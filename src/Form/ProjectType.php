@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Projects;
+use App\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -24,9 +25,10 @@ class ProjectType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description du projet',
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Écrivez la description du projet',
-                    'class' => 'mb-3'
+                    'class' => 'CKEditor mb-3'
                 ]
             ])
             ->add('url', TextType::class, [
@@ -44,21 +46,24 @@ class ProjectType extends AbstractType
                 ]
             ])
             ->add('excerpt', TextareaType::class, [
-                'label' => 'Description courte',
+                'label' => 'Extrait du projet',
                 'attr' => [
                     'placeholder' => 'Écrivez une description courte du projet',
                     'class' => 'mb-3'
                 ]
             ])
             ->add('details', TextType::class, [
-                'label' => 'Détails supplémentaire',
+                'label' => 'Technologies',
                 'attr' => [
                     'placeholder' => 'Indiquer les compétence métier utilisé',
                     'class' => 'mb-3'
                 ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Créer le projet'
+                'label' => 'Créer le projet',
+                'attr' => [
+                    'class' => 'mt-3 btn btn-primary'
+                ]
             ]);
         ;
     }
