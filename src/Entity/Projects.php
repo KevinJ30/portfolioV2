@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use App\Repository\ProjectsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectsRepository::class)
+ * @Vich\Uploadable
  */
 class Projects extends AbstractEntity
 {
@@ -36,6 +39,11 @@ class Projects extends AbstractEntity
      * @ORM\Column(type="string", length=255)
      */
     private $thumb;
+
+    /**
+     * @Vich\UploadableField(mapping="project_images", fileNameProperty="thumb")
+     **/
+    private $thumbFilename;
 
     /**
      * @ORM\Column(type="datetime")
@@ -148,5 +156,14 @@ class Projects extends AbstractEntity
         $this->details = $details;
 
         return $this;
+    }
+
+    public function setThumbFilename(File $thumb = null) : self {
+        $this->thumbFilename = $thumb;
+        return $this;
+    }
+
+    public function getThumbFilename() : ?File {
+        return $this->thumbFilename;
     }
 }

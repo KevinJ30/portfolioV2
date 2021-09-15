@@ -53,7 +53,7 @@ class ProjectController extends CRUDController {
         return $this->CRUDIndex(ProjectType::class, [
             'title' => 'Titre du projet',
             'url' => 'Lien vers le projet',
-            'thumb_url' => 'Image miniature',
+            'thumb' => 'Image miniature',
             'excerpt' => 'Description courte'
         ]);
     }
@@ -73,7 +73,6 @@ class ProjectController extends CRUDController {
         if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($project);
             $entityManager->flush();
-
             return $this->redirectToRoute('ADMIN_PROJECT_HOME');
         }
 
