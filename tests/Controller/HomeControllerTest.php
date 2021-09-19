@@ -6,7 +6,7 @@ use App\DataFixtures\AddHomeConfiguration;
 use App\DataFixtures\AuthorizeFixtures;
 use App\DataFixtures\ProjectsFixtures;
 use App\DataFixtures\SkillsFixtures;
-use App\DataFixtures\UserFixtures;
+use App\DataFixtures\UsersFixtures;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -26,7 +26,7 @@ class HomeControllerTest extends WebTestCase
             AuthorizeFixtures::class,
             ProjectsFixtures::class,
             SkillsFixtures::class,
-            UserFixtures::class
+            UsersFixtures::class
         ]);
     }
 
