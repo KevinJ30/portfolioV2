@@ -110,7 +110,7 @@ class Projects extends AbstractEntity
         return $this->thumb;
     }
 
-    public function setThumb(string $thumb): self
+    public function setThumb(string $thumb = null): self
     {
         $this->thumb = $thumb;
 

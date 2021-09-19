@@ -6,7 +6,11 @@ use App\Entity\Configuration;
 use App\Entity\Projects;
 use App\Form\ConfigurationType;
 use App\Form\ProjectType;
+use App\Services\Images\ImageResizer;
+use App\Services\Images\ResizerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Imagine\Gd\Image;
+use Intervention\Image\ImageManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,7 +68,7 @@ class ProjectController extends CRUDController {
      * @route("/create", methods={"GET", "POST"}, name="CREATE")
      * @return Response
      */
-    public function create(Request $request, EntityManagerInterface $entityManager) : Response {
+    public function create(Request $request, EntityManagerInterface $entityManager, ImageResizer $resizerImage) : Response {
         $project = new Projects();
         $form = $this->createForm(ProjectType::class, $project);
 
@@ -73,6 +77,8 @@ class ProjectController extends CRUDController {
         if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($project);
             $entityManager->flush();
+            $resizerImage->resize($project->getThumbFilename());
+
             return $this->redirectToRoute('ADMIN_PROJECT_HOME');
         }
 
@@ -98,7 +104,6 @@ class ProjectController extends CRUDController {
      *
      * @Route("/delete/{id}", name="DELETE", methods={"DELETE"})
      *
-     * @param Projects $project
      * @return JsonResponse
      */
     public function delete(Projects $project) : JsonResponse {
