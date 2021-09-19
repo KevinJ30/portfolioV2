@@ -6,7 +6,13 @@ use App\Entity\Configuration;
 use App\Entity\Projects;
 use App\Form\ConfigurationType;
 use App\Form\ProjectType;
+use App\Services\Images\ImageResizer;
+use App\Services\Images\ResizerInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Imagine\Gd\Image;
+use Intervention\Image\ImageManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -51,7 +57,7 @@ class ProjectController extends CRUDController {
         return $this->CRUDIndex(ProjectType::class, [
             'title' => 'Titre du projet',
             'url' => 'Lien vers le projet',
-            'thumb_url' => 'Image miniature',
+            'thumb' => 'Image miniature',
             'excerpt' => 'Description courte'
         ]);
     }
@@ -59,11 +65,26 @@ class ProjectController extends CRUDController {
     /**
      * Créer un nouveau projet
      *
-     * @route("/create", methods={"POST"}, name="CREATE")
+     * @route("/create", methods={"GET", "POST"}, name="CREATE")
      * @return Response
      */
-    public function create() : Response {
-        return $this->CRUDCreate(ProjectType::class);
+    public function create(Request $request, EntityManagerInterface $entityManager, ImageResizer $resizerImage) : Response {
+        $project = new Projects();
+        $form = $this->createForm(ProjectType::class, $project);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($project);
+            $entityManager->flush();
+            $resizerImage->resize($project->getThumbFilename());
+
+            return $this->redirectToRoute('ADMIN_PROJECT_HOME');
+        }
+
+        return $this->render('admin/project/create.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
@@ -83,7 +104,6 @@ class ProjectController extends CRUDController {
      *
      * @Route("/delete/{id}", name="DELETE", methods={"DELETE"})
      *
-     * @param Projects $project
      * @return JsonResponse
      */
     public function delete(Projects $project) : JsonResponse {
