@@ -13,13 +13,18 @@ class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
+     *
+     * @param ConfigurationRepository $configurationRepository
+     * @param SkillsRepository $skillsRepository
+     * @param ProjectsRepository $projectsRepository
+     * @return Response
      */
     public function index(ConfigurationRepository $configurationRepository, SkillsRepository $skillsRepository, ProjectsRepository $projectsRepository): Response
     {
         $configuration = $configurationRepository->getConfigurationHome();
         $skills = $skillsRepository->getSkillsGroupedType();
         $projects = $projectsRepository->getLastProjects(4);
-        //dd($projects);
+
         /**
          * Récuperer les informations de la home page dans la table configuration
          **/
