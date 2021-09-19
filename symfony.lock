@@ -106,8 +106,11 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
-    "imagine/imagine": {
-        "version": "1.2.4"
+    "guzzlehttp/psr7": {
+        "version": "2.0.0"
+    },
+    "intervention/image": {
+        "version": "2.6.1"
     },
     "jms/metadata": {
         "version": "2.5.1"
@@ -123,19 +126,6 @@
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.3.0"
-    },
-    "liip/imagine-bundle": {
-        "version": "1.8",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "1.8",
-            "ref": "ffbb72e74598f04cc7f79f9fc736c77eeb98f569"
-        },
-        "files": [
-            "./config/packages/liip_imagine.yaml",
-            "./config/routes/liip_imagine.yaml"
-        ]
     },
     "michelf/php-markdown": {
         "version": "1.9.0"
@@ -205,11 +195,20 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
+    "psr/http-factory": {
+        "version": "1.0.1"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"
