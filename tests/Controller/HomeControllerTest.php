@@ -2,15 +2,10 @@
 
 namespace App\Tests\Controller;
 
-use App\DataFixtures\AddHomeConfiguration;
-use App\DataFixtures\AuthorizeFixtures;
 use App\DataFixtures\ConfigurationFixtures;
 use App\DataFixtures\ProjectFixtures;
-use App\DataFixtures\ProjectsFixtures;
 use App\DataFixtures\SkillFixtures;
-use App\DataFixtures\SkillsFixtures;
 use App\DataFixtures\UserFixtures;
-use App\DataFixtures\UsersFixtures;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
