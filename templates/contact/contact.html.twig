@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Me Contactez{% endblock %}
+
+{% block body %}
+    <main class="page page-home">
+        <div class="section">
+            <div class="container">
+                <h1>Me contactez</h1>
+                <p>{{ contact_text.content }}</p>
+                {{ form(form) }}
+            </div>
+        </div>
+    </main>
+{% endblock %}

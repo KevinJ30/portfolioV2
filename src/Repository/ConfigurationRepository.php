@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Configuration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -27,6 +28,13 @@ class ConfigurationRepository extends ServiceEntityRepository
                     ->orderBy('c.name', 'desc')
                     ->getQuery()
                     ->execute();
+    }
+
+    public function getConfigurationContact() {
+        return $this->createQueryBuilder('c')
+            ->orWhere('c.name = \'contact_text\'')
+            ->getQuery()
+            ->execute();
     }
 
     // /**
