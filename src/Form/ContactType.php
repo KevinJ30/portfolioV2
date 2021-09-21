@@ -16,7 +16,7 @@ class ContactType extends AbstractType
         $builder
             ->add('fullname', TextType::class)
             ->add('email', TextType::class)
-            ->add('description', TextareaType::class)
+            ->add('content', TextareaType::class)
             ->add('Envoyer', SubmitType::class)
         ;
     }
@@ -24,7 +24,7 @@ class ContactType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'allow_extra_fields' => true
         ]);
     }
 }

@@ -48,4 +48,31 @@ class ContactControllerTest extends WebTestCase
         $contactText = $crawler->filter('h1 + p');
         $this->assertStringContainsString("Plus d'information", $contactText->text());
     }
+
+    public function testInvalidFormData() : void {
+        $formFields = [
+            'contact[fullname]' => '',
+            'contact[email]' => '.fr',
+            'contact[content]' => ''
+        ];
+
+        $this->client->request('GET', '/contact');
+        $crawler = $this->client->submitForm('Envoyer', $formFields);
+        $errorValidation = $crawler->filter('.invalid-feedback');
+        $this->assertEquals(3, $errorValidation->count());
+    }
+
+    public function testValidFormData() : void {
+        $formData = [
+            'contact[fullname]' => 'Testing my app',
+            'contact[email]' => 'test.app@test.fr',
+            'contact[content]' => 'my content application demo'
+        ];
+
+        $crawler = $this->client->request('GET', '/contact');
+         $form = $crawler->selectButton('Envoyer')->form($formData);
+         $this->client->submit($form);
+         $crawler = $this->client->followRedirect();
+         $this->assertEquals(1, $crawler->filter('.alert.alert-success')->count());
+    }
 }
