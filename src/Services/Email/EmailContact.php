@@ -2,27 +2,55 @@
 
 namespace App\Services\Email;
 
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Twig\Environment;
+use Twig\Environment as TwigEnvironment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+
 class EmailContact {
-    private \Swift_Mailer $mailer;
+    private MailerInterface $mailer;
+    private TwigEnvironment $twig;
 
-    public function __construct(\Swift_Mailer $mailer) {
+    public function __construct(ContainerInterface $container, MailerInterface $mailer, TwigEnvironment $twig) {
         $this->mailer = $mailer;
+        $this->twig = $twig;
     }
 
-    public function send(Object $data) : bool{
-        return $this->mailer->send($this->createMail($data));
+    /**
+     * Envoie le message
+     *
+     * @param Object $data
+     * @return bool
+     **/
+    public function send(Object $data) : bool {
+        try {
+            $this->mailer->send($this->createMail($data));
+            return true;
+        } catch (TransportExceptionInterface $e) {
+            return false;
+        }
     }
 
-    public function createMail(Object $data) : \Swift_Message {
-        $message = new \Swift_Message('joudrier-kevin contact from ' . $data->getFullname());
-        $message->setFrom('portfolio@joudrier-kevin.fr')
-            ->setTo('contact@joudrier-kevin.fr')
-            ->setBody(
-                'Le contenu du mail',
-                'text/html'
-            );
+    public function createMail(Object $data) : Email{
+            $email = new TemplatedEmail();
 
-        return $message;
+            try {
+                $email->from('portfolio@joudrier-kevin.fr')
+                    ->subject('Prise d\'informations joudrier-kevin.fr')
+                    ->to('contact@joudrier-kevin.fr')
+                    ->text('Sending your email at ' . $data->getEmail())
+                    ->htmlTemplate('email/contact.html.twig')
+                    ->context(['data' => $data])
+                ;
+            } catch (\Exception $e) {}
+
+            return $email;
     }
 
 }

@@ -21,10 +21,9 @@ class ContactController extends AbstractController
      * @param Request $request
      * @param ConfigurationRepository $configurationRepository
      * @param EmailContact $emailContact
-     * @param \Swift_Mailer $mailer
      * @return Response
-     */
-    public function contactAction(Request $request, ConfigurationRepository $configurationRepository, EmailContact $emailContact, \Swift_Mailer $mailer): Response
+     **/
+    public function contactAction(Request $request, ConfigurationRepository $configurationRepository, EmailContact $emailContact): Response
     {
         $contactEntity = new Contact();
         $contact_text = $configurationRepository->getConfigurationContact();
