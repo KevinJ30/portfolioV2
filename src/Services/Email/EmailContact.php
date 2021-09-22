@@ -17,7 +17,7 @@ class EmailContact {
     private MailerInterface $mailer;
     private TwigEnvironment $twig;
 
-    public function __construct(ContainerInterface $container, MailerInterface $mailer, TwigEnvironment $twig) {
+    public function __construct(MailerInterface $mailer, TwigEnvironment $twig) {
         $this->mailer = $mailer;
         $this->twig = $twig;
     }
