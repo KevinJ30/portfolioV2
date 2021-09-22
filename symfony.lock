@@ -166,6 +166,12 @@
     "phpstan/phpstan": {
         "version": "0.12.99"
     },
+    "phpstan/phpstan-doctrine": {
+        "version": "0.12.44"
+    },
+    "phpstan/phpstan-symfony": {
+        "version": "0.12.44"
+    },
     "phpunit/php-code-coverage": {
         "version": "9.2.6"
     },

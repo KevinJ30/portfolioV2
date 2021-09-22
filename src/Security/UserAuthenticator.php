@@ -22,7 +22,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
 
     public function __construct(UrlGeneratorInterface $urlGenerator)
     {
@@ -31,13 +31,17 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public function authenticate(Request $request): PassportInterface
     {
+        /** @var string $email **/
         $email = $request->request->get('email', '');
+
+        /** @var string $password */
+        $password = $request->request->get('password', '');
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
         return new Passport(
             new UserBadge($email),
-            new PasswordCredentials($request->request->get('password', '')),
+            new PasswordCredentials($password),
             [
                 new CsrfTokenBadge('authenticate', $request->get('_csrf_token')),
             ]

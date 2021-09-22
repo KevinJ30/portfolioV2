@@ -11,7 +11,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContactType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array<mixed> $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
         $builder
             ->add('fullname', TextType::class, [
@@ -41,7 +45,10 @@ class ContactType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver) : void
     {
         $resolver->setDefaults([
             'allow_extra_fields' => true

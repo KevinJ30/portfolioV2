@@ -30,7 +30,7 @@ class UsersController extends CRUDController {
     protected string $templatePath = "admin/users";
 
     /**
-     * @var array $actions Les actions des utilisateurs
+     * @var array<string> $actions Les actions des utilisateurs
      **/
     protected array $actions = [
         'home' => 'ADMIN_USERS_HOME',

@@ -12,7 +12,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ConfigurationType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array<mixed> $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
         $builder
             ->add('name', TextType::class, [
@@ -35,7 +39,10 @@ class ConfigurationType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver) : void
     {
         $resolver->setDefaults([
             'data_class' => Configuration::class,

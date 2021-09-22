@@ -20,22 +20,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @package App\Form\Skill
  **/
 class CreateType extends AbstractType {
-
-//    public function configureOptions(OptionsResolver $resolver) : void
-//    {
-//        $resolver->setDefaults([
-//            'data_class' => Skills::class,
-//            'csrf_protection' => true,
-//            'csrf_field_name' => '_token',
-//            'csrf_token_id' => 'skill_item'
-//        ]);
-//    }
-
     /**
      * Construit le formulaire
      *
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array<mixed>$options
      **/
     public function buildForm(FormBuilderInterface $builder, array $options):  void {
         $builder
@@ -60,9 +49,9 @@ class CreateType extends AbstractType {
                 ]
             ])
             ->add('icons', TextareaType::class, [
-                'label' => 'Ajouter le code SVG de la coméptence',
+                'label' => 'Ajouter le code SVG de la compétence',
                 'attr' => [
-                    'placeholder' => '<svg ...>',
+                    'placeholder' => "<svg ...>",
                     'class' => 'mb-3'
                 ]
             ])

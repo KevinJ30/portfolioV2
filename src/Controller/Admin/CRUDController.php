@@ -2,26 +2,28 @@
 
 namespace App\Controller\Admin;
 
-use App\Form\Skill\CreateType;
+use App\Entity\Projects;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ObjectRepository;
+use stdClass;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class CRUDController
+ **/
 class CRUDController extends AbstractController {
-
-    /**
-     * @var string $entity Nom de la class de l'entité
-     **/
-    protected string $entity = '';
+    protected string $entity = Projects::class;
 
     /**
      * @var EntityManagerInterface
      **/
-    protected EntityManagerInterface $entityManager;
+    protected EntityManagerInterface  $entityManager;
 
     /**
      * @var string $templatePath Chemin vers les fichiers template
@@ -29,7 +31,7 @@ class CRUDController extends AbstractController {
     protected string $templatePath;
 
     /**
-     * @var array $actions
+     * @var array<string> $actions
      **/
     protected array $actions = [];
 
@@ -43,8 +45,15 @@ class CRUDController extends AbstractController {
      **/
     private RequestStack $requestStack;
 
-
-    public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack) {
+    /**
+     * CRUDController constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param RequestStack $requestStack
+     */
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        RequestStack $requestStack
+    ) {
         $this->entityManager = $entityManager;
         $this->requestStack = $requestStack;
     }
@@ -54,7 +63,7 @@ class CRUDController extends AbstractController {
      * et définie des actions pour le CRUD
      *
      * @param string $formType
-     * @param array $fields
+     * @param array<mixed> $fields
      * @return Response
      */
     public function CRUDIndex(string $formType, array $fields) : Response {
@@ -123,6 +132,7 @@ class CRUDController extends AbstractController {
      * @return JsonResponse
      */
     public function CRUDDelete(object $entity) : JsonResponse{
+        /** @var Request $request **/
         $request = $this->requestStack->getCurrentRequest();
         $submittedToken = json_decode($request->getContent());
 
@@ -144,12 +154,14 @@ class CRUDController extends AbstractController {
         return $this->entity;
     }
 
-    protected function setEntity(string $entity) {
+    protected function setEntity(string $entity) : void {
         $this->entity = $entity;
     }
 
-    protected function getRepository() : ObjectRepository {
-        return $this->entityManager->getRepository($this->entity);
+    protected function getRepository() : EntityRepository {
+        /** @var EntityRepository $repository */
+        $repository = $this->entityManager->getRepository($this->entity);
+        return $repository;
     }
 
     protected function setTemplatePath(string $path) : void {
@@ -160,6 +172,9 @@ class CRUDController extends AbstractController {
         $this->actions[$name] = $routeName;
     }
 
+    /**
+     * @return string[]
+     */
     protected function getActions() : array {
         return $this->actions;
     }

@@ -20,7 +20,7 @@ class ConfigurationFixtures extends Fixture
      *
      * @param ObjectManager $manager
      **/
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager) : void
     {
         $manager->persist($this->createSiteTitle());
         $manager->persist($this->createIntroduction());

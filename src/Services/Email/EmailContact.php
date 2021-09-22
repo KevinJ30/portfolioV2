@@ -2,6 +2,7 @@
 
 namespace App\Services\Email;
 
+use App\Entity\Contact;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -25,10 +26,10 @@ class EmailContact {
     /**
      * Envoie le message
      *
-     * @param Object $data
+     * @param Contact $data
      * @return bool
      **/
-    public function send(Object $data) : bool {
+    public function send(Contact $data) : bool {
         try {
             $this->mailer->send($this->createMail($data));
             return true;
@@ -37,7 +38,11 @@ class EmailContact {
         }
     }
 
-    public function createMail(Object $data) : Email{
+    /**
+     * @param Contact $data
+     * @return Email
+     **/
+    public function createMail(Contact $data) : Email{
             $email = new TemplatedEmail();
 
             try {

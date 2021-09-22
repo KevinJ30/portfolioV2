@@ -27,7 +27,7 @@ class UserFixtures extends Fixture
      *
      * @param ObjectManager $manager
      **/
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager) : void
     {
         $manager->persist($this->createUser(['ROLE_ADMIN'], 'admin@test.fr', 'admin'));
         $manager->persist($this->createUser(['ROLE_MEMBER'], 'member@test.fr', 'member'));
@@ -38,7 +38,7 @@ class UserFixtures extends Fixture
     /**
      * Créer une compétence
      *
-     * @param array $roles Roles de l'utilisateur
+     * @param array<string> $roles Roles de l'utilisateur
      * @param string $email Email de l'utilisateur
      * @param string $password Mot de passe de l'utilisateur
      * @return User
