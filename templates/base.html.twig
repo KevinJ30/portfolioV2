@@ -8,7 +8,17 @@
         <link href="https://fonts.googleapis.com/css2?family=Rochester&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Rochester&display=swap" rel="stylesheet">
 
-        {% include 'elements/seo/seo.html.twig' %}
+        {# Meta og, twitter, ect... a rajouter plus tard #}
+
+        {# Meta Description #}
+        {% block seo_description %}
+            <meta name="description" content="Autodidacte et passionné par la création digitale, j'ai contribuer a plusieurs projets, découvrez mes différentes contributions.">
+        {% endblock %}
+
+        {# Meta Robots #}
+        {% block seo_robots %}
+            <meta name="robots" content="index, follow, max-image-preview:standard, max-snippet:-1, max-video-preview:-1">
+        {% endblock %}
 
         <title>{% block title %}{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
