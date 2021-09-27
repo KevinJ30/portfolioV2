@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /*
+Disallow: /Dashboard
+Disallow: /Dashboard/*
+sitemap: http://joudrier-kevin.fr/sitemap.xml
