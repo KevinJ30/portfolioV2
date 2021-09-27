@@ -33,7 +33,7 @@ class EmailContact {
         try {
             $this->mailer->send($this->createMail($data));
             return true;
-        } catch (TransportExceptionInterface $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -48,7 +48,7 @@ class EmailContact {
             try {
                 $email->from('portfolio@joudrier-kevin.fr')
                     ->subject('Prise d\'informations joudrier-kevin.fr')
-                    ->to('contact@joudrier-kevin.fr')
+                    ->to('kev.joudrier@gmail.com')
                     ->text('Sending your email at ' . $data->getEmail())
                     ->htmlTemplate('email/contact.html.twig')
                     ->context(['data' => $data])
