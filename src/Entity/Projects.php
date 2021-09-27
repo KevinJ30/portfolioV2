@@ -6,6 +6,7 @@ use App\Repository\ProjectsRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectsRepository::class)
@@ -18,50 +19,52 @@ class Projects extends AbstractEntity
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $url;
+    private ?string $url;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $thumb;
+    private ?string $thumb;
 
     /**
      * @Vich\UploadableField(mapping="project_images", fileNameProperty="thumb")
      **/
-    private $thumbFilename;
+    private ?File $thumbFilename;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
      */
-    private $created;
+    private ?\DateTimeImmutable $created;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $excerpt;
+    private ?string $excerpt;
 
     /**
      * @ORM\Column(type="string", length=150)
      */
-    private $details;
+    private ?string $details;
 
     public function __construct() {
         $this->setCreated(new \DateTimeImmutable());
+        $this->setThumb(null);
+        $this->setThumbFilename(null);
     }
 
     public function getId(): ?int
@@ -122,7 +125,7 @@ class Projects extends AbstractEntity
         return $this->created;
     }
 
-    public function setCreated(\DateTimeInterface $created): self
+    public function setCreated(\DateTimeImmutable $created): self
     {
         $this->created = $created;
 
@@ -130,16 +133,17 @@ class Projects extends AbstractEntity
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getExcerpt() : string
+    public function getExcerpt() : ?string
     {
         return $this->excerpt;
     }
 
     /**
-     * @param mixed $excerpt
-     */
+     * @param string $excerpt
+     * @return self
+     **/
     public function setExcerpt(string $excerpt): self
     {
         $this->excerpt = $excerpt;

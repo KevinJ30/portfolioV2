@@ -18,6 +18,8 @@ class ProjectsController extends AbstractController implements APIAuthorizationI
 {
     /**
      * @Route("/projects", name="projects")
+     * @param ProjectsRepository $projectsRepository
+     * @return Response
      */
     public function index(ProjectsRepository $projectsRepository): Response
     {

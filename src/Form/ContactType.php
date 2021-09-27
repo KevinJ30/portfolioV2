@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Configuration;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -10,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ConfigurationType extends AbstractType
+class ContactType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -19,23 +18,30 @@ class ConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
         $builder
-            ->add('name', TextType::class, [
-                'label' => 'Nom de la configuration',
+            ->add('fullname', TextType::class, [
+                'label' => 'Nom complet',
                 'attr' => [
-                    'placeholder' => 'Saisissez le nom de la configuration',
-                    'class' => 'mb-3'
+                    'placeholder' => 'John DOE'
+                ]
+            ])
+            ->add('email', TextType::class, [
+                'label' => 'Adresse e-mail',
+                'attr' => [
+                    'placeholder' => 'john.doe@john.fr'
                 ]
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Saisissez le contenu de la configuration',
+                'label' => 'Message',
                 'attr' => [
-                    'placeholder' => 'Saisissez le nom de la compétence',
-                    'class' => 'mb-3'
+                    'placeholder' => 'Vous avez besoins de mes services ?'
                 ]
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Ajouter'
-            ]);
+
+            ->add('Envoyer', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn-primary btn-outline'
+                ]
+            ])
         ;
     }
 
@@ -45,7 +51,7 @@ class ConfigurationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver) : void
     {
         $resolver->setDefaults([
-            'data_class' => Configuration::class,
+            'allow_extra_fields' => true
         ]);
     }
 }

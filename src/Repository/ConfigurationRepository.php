@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Configuration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,7 +20,12 @@ class ConfigurationRepository extends ServiceEntityRepository
         parent::__construct($registry, Configuration::class);
     }
 
-    public function getConfigurationHome() {
+    /**
+     * Retourne la liste des configurations de la page d'accueil
+     *
+     * @return array<mixed>
+     **/
+    public function getConfigurationHome() : array {
         return $this->createQueryBuilder('c')
                     ->orWhere('c.name = \'site_title\'')
                     ->orWhere('c.name = \'svg_introduction\'')
@@ -29,32 +35,15 @@ class ConfigurationRepository extends ServiceEntityRepository
                     ->execute();
     }
 
-    // /**
-    //  * @return Configuration[] Returns an array of Configuration objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
+    /**
+     * Retourne la liste des configurations pour la page contact
+     *
+     * @return array<mixed>
+     **/
+    public function getConfigurationContact() : array {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->orWhere('c.name = \'contact_text\'')
             ->getQuery()
-            ->getResult()
-        ;
+            ->execute();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Configuration
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

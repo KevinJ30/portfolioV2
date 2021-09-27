@@ -1,0 +1,8 @@
+{% apply inline_css(source('@styles/email.css')) %}
+    <div class="container contact">
+        <h1>Prise de contact</h1>
+        <p class="contact__fullname">Nom complet du contact : {{ data.fullname }}</p>
+        <p class="contact__fullname">Adresse e-mail du contact : {{ data.email }}</p>
+        <p class="contact__message">{{ data.content }}</p>
+    </div>
+{% endapply %}

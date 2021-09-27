@@ -26,7 +26,7 @@ class SkillsController extends CRUDController
     protected string $templatePath = "admin/skills";
 
     /**
-     * @var array $actions Les actions des compétences
+     * @var array<string> $actions Les actions des compétences
      **/
     protected array $actions = [
         'home' => 'ADMIN_SKILLS_HOME',

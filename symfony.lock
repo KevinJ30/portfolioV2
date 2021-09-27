@@ -163,6 +163,15 @@
     "phpspec/prophecy": {
         "version": "1.13.0"
     },
+    "phpstan/phpstan": {
+        "version": "0.12.99"
+    },
+    "phpstan/phpstan-doctrine": {
+        "version": "0.12.44"
+    },
+    "phpstan/phpstan-symfony": {
+        "version": "0.12.44"
+    },
     "phpunit/php-code-coverage": {
         "version": "9.2.6"
     },
@@ -688,6 +697,12 @@
     },
     "theseer/tokenizer": {
         "version": "1.2.0"
+    },
+    "tijsverkoyen/css-to-inline-styles": {
+        "version": "2.2.3"
+    },
+    "twig/cssinliner-extra": {
+        "version": "v3.3.3"
     },
     "twig/extra-bundle": {
         "version": "v3.3.1"
