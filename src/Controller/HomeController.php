@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="HOME")
      *
      * @param ConfigurationRepository $configurationRepository
      * @param SkillsRepository $skillsRepository
@@ -26,7 +26,7 @@ class HomeController extends AbstractController
         $projects = $projectsRepository->getLastProjects(4);
 
         /**
-         * Récuperer les informations de la home page dans la table configuration
+         * Récupérer les informations de la home page dans la table configuration
          **/
         // Get Introduction & get site_title
         return $this->render('home/index.html.twig', [
