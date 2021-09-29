@@ -1,10 +1,8 @@
-<div id="alert" class="container-fluid">
-    {% for type, messages in app.flashes(['success', 'error']) %}
-        {% for message in messages %}
-            <div class="alert alert-{{ type == 'error' ? 'danger' : type }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endfor %}
+{% for type, messages in app.flashes(['success', 'error']) %}
+    {% for message in messages %}
+        <div id="notification" class="alert alert-{{ type == 'error' ? 'danger' : type }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     {% endfor %}
-</div>
+{% endfor %}
