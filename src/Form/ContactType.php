@@ -37,7 +37,8 @@ class ContactType extends AbstractType
                 ]
             ])
 
-            ->add('Envoyer', SubmitType::class, [
+            ->add('send', SubmitType::class, [
+                'label' => 'Envoyer',
                 'attr' => [
                     'class' => 'btn-primary btn-outline'
                 ]
