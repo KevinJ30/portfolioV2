@@ -6,6 +6,7 @@ use App\Entity\Projects;
 use App\Form\ProjectType;
 use App\Services\Images\ImageResizer;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,12 +74,12 @@ class ProjectController extends CRUDController {
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            /** @var string $image */
+            /** @var UploadedFile $image */
             $image = $project->getThumbFilename();
 
             $entityManager->persist($project);
             $entityManager->flush();
-            $resizerImage->resize($image);
+            $resizerImage->resize($project);
 
             return $this->redirectToRoute('ADMIN_PROJECT_HOME');
         }
