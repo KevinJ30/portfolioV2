@@ -50,3 +50,9 @@ table tbody tr {
 table tbody tr:nth-child(even) {
    background:$dark-secondary-color;
 }
+
+@include down(600) {
+   html, body {
+      font-size:20px;
+   }
+}
