@@ -8,20 +8,22 @@ use App\DataFixtures\SkillFixtures;
 use App\DataFixtures\UserFixtures;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ContactControllerTest extends WebTestCase
 {
-    protected AbstractDatabaseTool  $databaseTool;
+    protected AbstractDatabaseTool $databaseTool;
 
-    protected ?KernelBrowser $client = null;
+    protected KernelBrowser $client;
 
     public function setUp(): void
     {
         // Load Fixtures
-        $this->client = static::createClient();
+        $this->client = self::createClient();
 
+        /** @var ContainerInterface $container */
         $container = static::getContainer();
         $this->databaseTool = $container->get(DatabaseToolCollection::class)->get();
 
@@ -38,6 +40,7 @@ class ContactControllerTest extends WebTestCase
      **/
     public function testRequestResponseStatusSuccessful(): void
     {
+        /** @var KernelBrowser $crawler */
         $crawler = $this->client->request('GET', '/contact');
         $this->assertResponseIsSuccessful();
     }
