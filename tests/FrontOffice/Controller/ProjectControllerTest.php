@@ -11,6 +11,7 @@ use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Crawler;
 
 class ProjectControllerTest extends WebTestCase {
 
@@ -42,16 +43,20 @@ class ProjectControllerTest extends WebTestCase {
     }
 
     /**
+     * @param Crawler $crawler
+     * @param int $expectedProject Nombre de projet attendu
+     */
+    public function assertCountProject(Crawler $crawler, int $expectedProject) : void {
+        $projectCard = $crawler->filter('.projects__container .card');
+        $this->assertCount($expectedProject, $projectCard);
+    }
+
+    /**
      * Devrait afficher tous les projets de la base de données
      **/
     public function  testDisplayAllProjects() : void {
         $crawler = $this->client->request('GET', '/projects');
-        $projectCard = $crawler->filter('.projects__container .card');
-        $this->assertCount(6, $projectCard);
-
-        $crawler = $this->client->request('GET', '/projects?page=2');
-        $projectCard = $crawler->filter('.projects__container .card');
-        $this->assertCount(4, $projectCard);
+        $this->assertCountProject($crawler, 6);
     }
 
     /**
@@ -75,7 +80,7 @@ class ProjectControllerTest extends WebTestCase {
      **/
     public function testDisplaySixProjectForPaginate() : void {
         $crawler = $this->client->request('GET', '/projects');
-        $this->assertCount(6, $crawler->filter('.projects__container .card'));
+        $this->assertCountProject($crawler, 6);
     }
 
     /**
