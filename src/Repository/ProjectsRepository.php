@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Projects;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -31,6 +32,12 @@ class ProjectsRepository extends ServiceEntityRepository
                     ->setMaxResults($number)
                     ->getQuery()
                     ->execute();
+    }
+
+    public function getQueryPaginate() : Query {
+        return $this->createQueryBuilder('p')
+                   ->orderBy('p.created', 'desc')
+                   ->getQuery();
     }
 
     // /**

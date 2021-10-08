@@ -47,7 +47,11 @@ class ProjectControllerTest extends WebTestCase {
     public function  testDisplayAllProjects() : void {
         $crawler = $this->client->request('GET', '/projects');
         $projectCard = $crawler->filter('.projects__container .card');
-        $this->assertCount(10, $projectCard);
+        $this->assertCount(6, $projectCard);
+
+        $crawler = $this->client->request('GET', '/projects?page=2');
+        $projectCard = $crawler->filter('.projects__container .card');
+        $this->assertCount(4, $projectCard);
     }
 
     /**
@@ -66,8 +70,36 @@ class ProjectControllerTest extends WebTestCase {
         $this->assertSelectorTextContains('p', "Il n'y a encore aucun projet !");
     }
 
+    /**
+     * Devrais afficher les 6 projets de la page 1
+     **/
     public function testDisplaySixProjectForPaginate() : void {
         $crawler = $this->client->request('GET', '/projects');
         $this->assertCount(6, $crawler->filter('.projects__container .card'));
+    }
+
+    /**
+     * Devrait afficher la navigation pour la pagination
+     **/
+    public function testDisplayPaginationNav() : void {
+        $crawler = $this->client->request('GET', '/projects');
+        $paginatorNav = $crawler->filter('.pagination');
+        $this->assertEquals(1, $paginatorNav->count());
+    }
+
+    /**
+     * Ne devrait pas afficher la pagination si
+     * il n'y a aucun projet
+     **/
+    public function testNotDisplayPaginationWithNoProject() : void {
+        $this->databaseTool->withPurgeMode(1)->loadFixtures([
+            ConfigurationFixtures::class,
+            UserFixtures::class,
+            SkillFixtures::class
+        ]);
+
+        $crawler = $this->client->request('GET', '/projects');
+        $paginatorNav = $crawler->filter('.pagination');
+        $this->assertEquals(0, $paginatorNav->count());
     }
 }
