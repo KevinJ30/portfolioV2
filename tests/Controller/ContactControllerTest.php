@@ -31,7 +31,6 @@ class ContactControllerTest extends WebTestCase
             SkillFixtures::class,
             ProjectFixtures::class
         ]);
-
     }
 
     /**
