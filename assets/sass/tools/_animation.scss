@@ -1,0 +1,97 @@
+$animation-duration: .3s;
+
+$animation-offset: 50px;
+
+.animation {
+  opacity: 0;
+  animation:none!important;
+  transition: 0s!important;
+}
+
+.fade-in-left {
+    animation:fade-in-left $animation-duration both;
+}
+
+.fade-in-right {
+    animation:fade-in-right $animation-duration both;
+}
+.fade-in-top {
+    animation:fade-in-top $animation-duration both;
+}
+
+.fade-in-bottom {
+    animation:fade-in-bottom $animation-duration both;
+}
+
+.reveal-1 {
+  transition-delay:.1s;
+  animation-delay: .1s;
+}
+
+.reveal-2 {
+  transition-delay:.2s;
+  animation-delay: .2s;
+}
+
+.reveal-3 {
+  transition-delay:.3s;
+  animation-delay: .3s;
+}
+
+.reveal-4 {
+  transition-delay:.4s;
+  animation-delay: .4s;
+}
+
+.reveal-5 {
+  transition-delay:.5s;
+  animation-delay: .5s;
+}
+
+@keyframes fade-in-left {
+    0% {
+        opacity:0;
+        transform: translateX(-$animation-offset);
+    }
+
+    100% {
+      opacity:1;
+      transform: translateX(0);
+    }
+}
+
+@keyframes fade-in-right {
+  0% {
+    opacity:0;
+    transform: translateX($animation-offset);
+  }
+
+  100% {
+    opacity:1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in-top {
+  0% {
+    opacity:0;
+    transform: translateY(-$animation-offset);
+  }
+
+  100% {
+    opacity:1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-bottom {
+  0% {
+    opacity:0;
+    transform: translateY($animation-offset);
+  }
+
+  100% {
+    opacity:1;
+    transform: translateY(0);
+  }
+}
