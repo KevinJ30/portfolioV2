@@ -17,6 +17,7 @@
         "fzaninotto/faker": "^1.9",
         "intervention/image": "^2.6",
         "knplabs/knp-markdown-bundle": "^1.9",
+        "knplabs/knp-paginator-bundle": "^5.7",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/apache-pack": "^1.0",
