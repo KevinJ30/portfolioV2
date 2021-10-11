@@ -15,7 +15,9 @@ class ProjectController extends AbstractController
 
     /**
      * @Route("/projects", name="projects")
+     * @param Request $request
      * @param ProjectsRepository $projectsRepository
+     * @param PaginatorInterface $paginator
      * @return Response
      */
     public function indexAction(Request $request, ProjectsRepository $projectsRepository, PaginatorInterface $paginator): Response

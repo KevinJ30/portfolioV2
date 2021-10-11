@@ -1,10 +1,31 @@
+/**
+ * Pagination
+ **/
 .pagination {
-  text-align: center;
   margin:space(2, 8) 0;
+  text-align: center;
 }
 
-.pagination .page a {
-    display: inline-block;
-    padding:16px;
-    background-color:red;
+.pagination--btn-prev, .pagination--btn-next, .pagination--btn-number {
+  display:inline-block;
+  padding:8px;
+  border:none;
+  background-color: $secondary-color;
+  border-radius: 3px;
+}
+
+span.pagination--btn {
+  background: transparent;
+}
+
+.pagination--btn.is-active {
+  background: transparent;
+}
+
+/**
+ * Icone de la pagination
+ **/
+.icon-prev, .icon-next {
+  width: 18px;
+  vertical-align: middle;
 }
