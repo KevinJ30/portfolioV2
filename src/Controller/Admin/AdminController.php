@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class AdminController
  * @package App\Controller\Admin
  *
- * @Route("/Dashboard", name="ADMIN_")
+ * @Route("/dashboard", name="ADMIN_")
  **/
 class AdminController extends AbstractController
 {
