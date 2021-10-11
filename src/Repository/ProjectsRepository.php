@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Projects;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -33,32 +34,14 @@ class ProjectsRepository extends ServiceEntityRepository
                     ->execute();
     }
 
-    // /**
-    //  * @return Projects[] Returns an array of Projects objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
+    /**
+     * Retourne la requête pour la pagination
+     *
+     * @return Query
+     **/
+    public function getQueryPaginate() : Query {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+                   ->orderBy('p.created', 'desc')
+                   ->getQuery();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Projects
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
