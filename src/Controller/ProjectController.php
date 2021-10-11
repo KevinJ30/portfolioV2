@@ -14,7 +14,7 @@ class ProjectController extends AbstractController
     public const PROJECT_PER_PAGE = 6;
 
     /**
-     * @Route("/projects", name="projects")
+     * @Route("/projects", name="PROJECTS")
      * @param Request $request
      * @param ProjectsRepository $projectsRepository
      * @param PaginatorInterface $paginator
