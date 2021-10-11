@@ -4,6 +4,10 @@
 
 @import 'components/modal';**/
 
+html, body {
+  height:100%;
+}
+
 .sidebar__title {
   font-size:1.2em;
 }
@@ -24,3 +28,7 @@ textarea.form-control {
 .ck-editor__editable {
   height:250px;
 }
+
+/** Pages **/
+
+@import 'pages/login.scss';

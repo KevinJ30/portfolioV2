@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('admin') }}
+    {% endblock %}
+
+    <title>Dashboard | {% block title %}{% endblock %}</title>
+</head>
+
+<body class="bg-light">
+    {% include 'elements/notifications/notifications.html.twig' %}
+
+    {% block content %}{% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('admin') }}
+    {% endblock %}
+</body>
+</html>
+
+
+{#<!doctype html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="utf-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
+{#    <meta name="description" content="">#}
+{#    <meta name="author" content="">#}
+{#    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">#}
+
+{#    <title>Signin Template for Bootstrap</title>#}
+
+{#    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">#}
+
+{#    <!-- Bootstrap core CSS -->#}
+{#    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">#}
+
+{#    <!-- Custom styles for this template -->#}
+{#    <link href="signin.css" rel="stylesheet">#}
+{#</head>#}
+
+{#<body class="text-center">#}
+{#    {% block body %}#}
+{#        #}
+{#    {% endblock %}#}
+{#</body>#}
+{#</html>#}
+
