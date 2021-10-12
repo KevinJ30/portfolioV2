@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class UsersController
  *
  * CRUD Utilisateurs
- * @route("/Dashboard/users", name="ADMIN_USERS_")
+ * @route("/dashboard/users", name="ADMIN_USERS_")
  **/
 class UsersController extends CRUDController {
 

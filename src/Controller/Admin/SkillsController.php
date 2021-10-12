@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Gestion des compétences
  *
- * @route("/Dashboard/skill", name="ADMIN_SKILLS_")
+ * @route("/dashboard/skill", name="ADMIN_SKILLS_")
  **/
 class SkillsController extends CRUDController
 {

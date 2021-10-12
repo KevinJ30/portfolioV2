@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Gestion des configuration
  *
- * @route("/Dashboard/configuration", name="ADMIN_CONFIGURATION_")
+ * @route("/dashboard/configuration", name="ADMIN_CONFIGURATION_")
  **/
 class ConfigurationController extends CRUDController {
     /**

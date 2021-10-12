@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Gestion des projets
  *
- * @route("/Dashboard/project", name="ADMIN_PROJECT_")
+ * @route("/dashboard/project", name="ADMIN_PROJECT_")
  **/
 class ProjectController extends CRUDController {
     /**
