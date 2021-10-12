@@ -20,6 +20,18 @@
   animation-delay: .3s;
 }
 
+.reveal-loaded .reveal-5 {
+  animation-delay: .4s;
+}
+
+.reveal-loaded .reveal-6 {
+  animation-delay: .5s;
+}
+
+.reveal-loaded .reveal-7 {
+  animation-delay: .6s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal-loaded  [class*="reveal-"] {
     animation: none!important;
