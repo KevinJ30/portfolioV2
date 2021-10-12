@@ -3,9 +3,10 @@
     <p class="section__details">Parcourez une petite partie de mes réalisations</p>
     {% if projects %}
 
-        <div class="projects__container">
+        <div class="projects__container reveal">
+            {% set reveal = 1 %}
             {% for project in projects %}
-                <div class="card">
+                <div class="card fade-in-top reveal-loaded reveal reveal-{{ reveal }}">
                     <div class="card__image">
                         <img src="{{ vich_uploader_asset(project, 'thumbFilename') }}" alt="card image">
                     </div>
@@ -16,6 +17,7 @@
                         <a class="btn btn-primary btn-outline mt-4" href="#">En savoir plus...</a>
                     </div>
                 </div>
+                {% set reveal = reveal + 1 %}
             {% endfor %}
         </div>
 
