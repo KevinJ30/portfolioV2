@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Projects;
 use App\Repository\ProjectsRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,5 +29,14 @@ class ProjectController extends AbstractController
             'controller_name' => 'ProjectController',
             'projects' => $projects->getTotalItemCount() ? $projects : null
         ]);
+    }
+
+    /**
+     * @Route("/project/{id}", name="PROJECTS_DETAILS")
+     * @param Projects $project
+     */
+    public function detailsAction(Projects $project) : void  {
+        dd($project);
+
     }
 }
