@@ -6,10 +6,10 @@
 
         {% for type, data in skills %}
             <h3>{{ type }}</h3>
-            <div class="skills__container">
-
+            <div class="skills__container reveal">
+                {% set reveal = 1 %}
                 {% for skill in data %}
-                    <div class="skill">
+                    <div class="skill reveal-{{ reveal }}">
                         <div class="skill__notes">
                             {{ notes(skill.level) }}
                         </div>
@@ -22,6 +22,7 @@
                             {{ skill.name }}
                         </div>
                     </div>
+                    {% set reveal = reveal + 1 %}
                 {% endfor %}
             </div>
         {% endfor %}
