@@ -61,6 +61,11 @@ class Projects extends AbstractEntity
      */
     private ?string $details;
 
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private ?\DateTimeImmutable $updated;
+
     public function __construct() {
         $this->setCreated(new \DateTimeImmutable());
         $this->setThumb(null);
@@ -116,7 +121,6 @@ class Projects extends AbstractEntity
     public function setThumb(string $thumb = null): self
     {
         $this->thumb = $thumb;
-
         return $this;
     }
 
@@ -132,9 +136,6 @@ class Projects extends AbstractEntity
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getExcerpt() : ?string
     {
         return $this->excerpt;
@@ -164,10 +165,25 @@ class Projects extends AbstractEntity
 
     public function setThumbFilename(File $thumb = null) : self {
         $this->thumbFilename = $thumb;
+
+        if($thumb) {
+            $this->setUpdatedAt(new \DateTimeImmutable());
+        }
+
         return $this;
     }
 
     public function getThumbFilename() : ?File {
         return $this->thumbFilename;
+    }
+
+    public function getUpdatedAt() : \DateTimeImmutable {
+        return $this->updated;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $datetime) : self {
+        $this->updated = $datetime;
+
+        return $this;
     }
 }

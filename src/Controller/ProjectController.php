@@ -32,11 +32,15 @@ class ProjectController extends AbstractController
     }
 
     /**
+     * Affiche les details d'un projet
+     *
      * @Route("/project/{id}", name="PROJECTS_DETAILS")
      * @param Projects $project
+     * @return Response
      */
-    public function detailsAction(Projects $project) : void  {
-        dd($project);
-
+    public function detailsAction(Projects $project) : Response  {
+        return $this->render('project/details.html.twig', [
+            'project' => $project
+        ]);
     }
 }

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block body %}
+    <main class="page page-project-details">
+        <div class="container">
+            <h1>{{ project.title }}</h1>
+            <div class="project--details mb-2">
+                <p>{{ project.details }}</p>
+            </div>
+            <!-- Contenu du projet -->
+
+            {{ project.description | raw }}
+        </div>
+    </main>
+{% endblock %}
