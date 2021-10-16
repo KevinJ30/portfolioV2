@@ -49,7 +49,11 @@ class ProjectType extends AbstractType
                 'attr' => [
                     'placeholder' => 'http://...',
                     'class' => 'mb-3'
-                ]
+                ],
+                'required' => false,
+                'delete_label' => false,
+                'allow_delete' => false,
+                'download_link' => false
             ])
             ->add('excerpt', TextareaType::class, [
                 'label' => 'Extrait du projet',
