@@ -52,6 +52,11 @@ table tbody tr:nth-child(even) {
    background:$dark-secondary-color;
 }
 
+img {
+   display:inline-block;
+   width: 100%;
+}
+
 @include down(600) {
    html, body {
       font-size:23px;

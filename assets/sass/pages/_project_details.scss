@@ -1,0 +1,23 @@
+.project--container-details .project--details {
+  margin-left:space(2, 8);
+}
+
+.project--columns {
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.project--columns > div {
+  padding-right:space(4, 8);
+}
+
+.project--title + p {
+  font-size:0.7em;
+  color:$secondary-color;
+}
+
+.project--image img {
+    width: 100%;
+    height:100%;
+  object-fit: cover;
+}
