@@ -37,14 +37,14 @@ class Projects extends AbstractEntity
     private ?string $url;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $thumb;
+    private ?string $thumb = null;
 
     /**
      * @Vich\UploadableField(mapping="project_images", fileNameProperty="thumb")
      **/
-    private ?File $thumbFilename;
+    private ?File $thumbFilename = null;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -61,10 +61,14 @@ class Projects extends AbstractEntity
      */
     private ?string $details;
 
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private ?\DateTimeImmutable $updated;
+
     public function __construct() {
-        $this->setCreated(new \DateTimeImmutable());
-        $this->setThumb(null);
-        $this->setThumbFilename(null);
+        $this->setCreated(new \DateTimeImmutable('now'));
+        $this->setUpdatedAt(new \DateTimeImmutable('now'));
     }
 
     public function getId(): ?int
@@ -108,15 +112,28 @@ class Projects extends AbstractEntity
         return $this;
     }
 
+    public function getThumbFilename() : ?File {
+        return $this->thumbFilename;
+    }
+
+    public function setThumbFilename(?File $file = null) : Projects {
+        $this->thumbFilename = $file;
+
+        if($file) {
+            $this->setUpdatedAt(new \DateTimeImmutable('now'));
+        }
+
+        return $this;
+    }
+
     public function getThumb(): ?string
     {
         return $this->thumb;
     }
 
-    public function setThumb(string $thumb = null): self
+    public function setThumb(?string $thumb): self
     {
         $this->thumb = $thumb;
-
         return $this;
     }
 
@@ -132,9 +149,6 @@ class Projects extends AbstractEntity
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getExcerpt() : ?string
     {
         return $this->excerpt;
@@ -162,12 +176,13 @@ class Projects extends AbstractEntity
         return $this;
     }
 
-    public function setThumbFilename(File $thumb = null) : self {
-        $this->thumbFilename = $thumb;
-        return $this;
+    public function getUpdatedAt() : \DateTimeImmutable {
+        return $this->updated;
     }
 
-    public function getThumbFilename() : ?File {
-        return $this->thumbFilename;
+    public function setUpdatedAt(\DateTimeImmutable $datetime) : self {
+        $this->updated = $datetime;
+
+        return $this;
     }
 }

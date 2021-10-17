@@ -8,6 +8,21 @@ html, body {
   height:100%;
 }
 
+/**
+ * General
+ **/
+
+.vich-image a {
+  margin:16px 0;
+}
+
+.vich-image a img {
+  padding: space(2, 0) 0;
+  width: 100%;
+  display:block;
+  vertical-align: initial;
+}
+
 .sidebar__title {
   font-size:1.2em;
 }

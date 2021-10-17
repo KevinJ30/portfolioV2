@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block body %}
+    <main class="page page-project-details">
+        <div class="container">
+            <h1 class="project--title">{{ project.title }}</h1>
+            <p>{{ project.details }}</p>
+
+            <div class="project--columns">
+                <div class="project--image">
+                    <img src="{{ vich_uploader_asset(project, 'thumbFilename') }}" alt="{{ project.title }}">
+                </div>
+
+                <div class="project--details">
+                    <!-- Contenu du projet -->
+                    {{ project.description | raw }}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

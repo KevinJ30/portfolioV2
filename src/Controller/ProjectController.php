@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Projects;
 use App\Repository\ProjectsRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,6 +28,19 @@ class ProjectController extends AbstractController
         return $this->render('project/index.html.twig', [
             'controller_name' => 'ProjectController',
             'projects' => $projects->getTotalItemCount() ? $projects : null
+        ]);
+    }
+
+    /**
+     * Affiche les details d'un projet
+     *
+     * @Route("/project/{id}", name="PROJECTS_DETAILS")
+     * @param Projects $project
+     * @return Response
+     */
+    public function detailsAction(Projects $project) : Response  {
+        return $this->render('project/details.html.twig', [
+            'project' => $project
         ]);
     }
 }

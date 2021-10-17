@@ -1,0 +1,15 @@
+{% set reveal = 1 %}
+{% for project in projects %}
+    <div class="card fade-in-top reveal-loaded reveal reveal-{{ reveal }}">
+        <div class="card__image">
+            <img src="{{ vich_uploader_asset(project, 'thumbFilename') }}" alt="card image">
+        </div>
+        <div class="card__content">
+            <p class="card__details">{{ project.details }}</p>
+            <h3>{{ project.title }}</h3>
+            {{ project.excerpt|markdown}}
+            <a class="btn btn-primary btn-outline mt-4" href="{{ path('PROJECTS_DETAILS',{'id' : project.id}) }}">En savoir plus...</a>
+        </div>
+    </div>
+    {% set reveal = reveal + 1 %}
+{% endfor %}
