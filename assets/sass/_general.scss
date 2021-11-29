@@ -15,7 +15,9 @@ html, body {
 
 body {
    margin-bottom:space(4, 8);
-   background: $primary-color;
+   background: url('../img/background.jpg');
+   background-size: cover;
+   background-attachment: fixed;
    color: $light-color;
 }
 
